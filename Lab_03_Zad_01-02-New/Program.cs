@@ -5,13 +5,13 @@ using System.Linq.Expressions;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
-using static Lab_03_Zad_01_02.Program;
+using static Lab_03_Zad_01_02_New.Program;
 
-namespace Lab_03_Zad_01_02
+namespace Lab_03_Zad_01_02_New
 {
     internal class Program
     {
-        
+
 
         public abstract class Item // Klasa bazowa dla elementów w katalogu
         {
@@ -57,7 +57,7 @@ namespace Lab_03_Zad_01_02
             public abstract string GenerateBarCode();
         }
 
-        public class Catalog // Klasa reprezentująca katalog zawierający  wiele elementów.
+        public class Catalog : IItemManagment // Klasa reprezentująca katalog zawierający  wiele elementów.
         {
             public IList<Item> Items { get; set; }
             public string ThematicDepartment { get; set; }
@@ -74,7 +74,7 @@ namespace Lab_03_Zad_01_02
                 Items = items;
             }
             public void AddItem(Item item) // Dodawanie nowego elementu do katalogu
-            {  
+            {
                 Items.Add(item);
             }
 
@@ -88,6 +88,24 @@ namespace Lab_03_Zad_01_02
                 {
                     Console.WriteLine(item);
                 }
+            }
+
+            public Item FindItemBy(int id)
+            {
+                // Metoda znajduje element w katalogu po identyfikatorze.
+                return Items.FirstOrDefault(item => item.Id == id);
+            }
+
+            public Item FindItemBy(string title)
+            {
+                // Metoda znajduje element w katalogu po tytule.
+                return Items.FirstOrDefault(item => item.Title == title);
+            }
+
+            public Item FindItem(Expression<Func<Item, bool>> predicate)
+            {
+                // Metoda znajduje element w katalogu na podstawie określonego predykatu.
+                return Items.FirstOrDefault(item => predicate.Compile()(item));
             }
         }
 
@@ -227,38 +245,43 @@ namespace Lab_03_Zad_01_02
 
         public interface IItemManagment
         {
-            void ShowAllItems();
-            Item FindItemBy(int id);
-            Item FindItemBy(string title);
-            Item FindItem(Expression<Func<Item, bool>> predicate);
+            // Interfejs definiuje operacje związane z zarządzaniem przedmiotami w bibliotece.
+
+            void ShowAllItems(); // Metoda wyświetlająca wszystkie przedmioty w bibliotece.
+            Item FindItemBy(int id); // Metoda wyszukująca przedmiot po identyfikatorze.
+            Item FindItemBy(string title); // Metoda wyszukująca przedmiot po tytule.
+            Item FindItem(Expression<Func<Item, bool>> predicate); // Metoda wyszukująca przedmiot za pomocą predykatu.
         }
 
         public class Library : IItemManagment
         {
-            public string Adress { get; set; }
-            public IList<Librarian> Librarians { get; set; }
-            public IList<Catalog> Catalogs { get; set; }
+            // Klasa reprezentująca bibliotekę.
 
-            public Library()
+            public string Adress { get; set; } // Adres biblioteki.
+            public IList<Librarian> Librarians { get; set; } // Lista bibliotekarzy pracujących w bibliotece.
+            public IList<Catalog> Catalogs { get; set; } // Lista katalogów w bibliotece.
+
+            public Library() // Konstruktor domyślny, inicjalizuje właściwości obiektu.
             {
                 Adress = string.Empty;
                 Librarians = new List<Librarian>();
                 Catalogs = new List<Catalog>();
             }
 
-            public Library(string adress, IList<Librarian> librarians, IList<Catalog> catalogs)
+            public Library(string adress, IList<Librarian> librarians, IList<Catalog> catalogs) // Konstruktor, który przyjmuje adres, listę bibliotekarzy i listę katalogów jako parametry.
             {
                 Adress = adress;
                 Librarians = librarians;
                 Catalogs = catalogs;
             }
 
-            public void AddLibrarian(Librarian librarian)
+            public void AddLibrarian(Librarian librarian) // Metoda dodająca bibliotekarza do listy bibliotekarzy.
             {
-                Librarians.Add(librarian);
+                if (librarian != null)
+                    Librarians.Add(librarian);
             }
 
-            public void ShowAllLibrarians()
+            public void ShowAllLibrarians() // Metoda wyświetlająca wszystkich bibliotekarzy w bibliotece.
             {
                 foreach (var librarian in Librarians)
                 {
@@ -266,38 +289,55 @@ namespace Lab_03_Zad_01_02
                 }
             }
 
-            public void AddCatalog(Catalog catalog)
+            public void AddCatalog(Catalog catalog) // Metoda dodająca katalog do biblioteki.
             {
                 Catalogs.Add(catalog);
             }
 
-            public void AddItem(Item item, string thematicDepartment)
+            public void AddItem(Item item, string thematicDepartment) // Metoda dodająca przedmiot do katalogu w określonym dziale tematycznym.
             {
-                
+                Catalog? catalog = Catalogs.FirstOrDefault(c => c.ThematicDepartment == thematicDepartment);
+
+                if (catalog == null)
+                {
+                    // Jeśli katalog nie istnieje, tworzymy nowy katalog i dodajemy do niego element.
+                    catalog = new Catalog(thematicDepartment, new List<Item>());
+                    Catalogs.Add(catalog);
+                }
+
+                // Dodajemy element do katalogu.
+                catalog.AddItem(item);
             }
 
-            void IItemManagment.ShowAllItems()
+            public void ShowAllItems() // Metoda wyświetlająca wszystkie przedmioty w bibliotece.
             {
-                throw new NotImplementedException();
+                foreach (var catalog in Catalogs)
+                {
+                    Console.WriteLine(catalog);
+                    catalog.ShowAllItems();
+                }
             }
 
-            Item IItemManagment.FindItemBy(int id)
+            public Item FindItemBy(int id) // Metoda znajduje element w bibliotece po identyfikatorze.
             {
-                throw new NotImplementedException();
+                return Catalogs.SelectMany(c => c.Items).FirstOrDefault(item => item.Id == id);
             }
 
-            Item IItemManagment.FindItemBy(string title)
+            public Item FindItemBy(string title) // Metoda znajduje element w bibliotece po tytule.
             {
-                throw new NotImplementedException();
+                return Catalogs.SelectMany(c => c.Items).FirstOrDefault(item => item.Title == title);
             }
 
-            Item IItemManagment.FindItem(Expression<Func<Item, bool>> predicate)
+            public Item FindItem(Expression<Func<Item, bool>> predicate) // Metoda znajduje element w bibliotece na podstawie określonego predykatu.
             {
-                throw new NotImplementedException();
+                return Catalogs.SelectMany(c => c.Items).FirstOrDefault(item => predicate.Compile()(item));
+            }
+
+            public override string ToString() // Metoda zwracająca reprezentację tekstową biblioteki.
+            {
+                return $"Library | {Adress}";
             }
         }
-
-
 
         static void Main(string[] args)
         {
@@ -325,9 +365,58 @@ namespace Lab_03_Zad_01_02
             Console.WriteLine(catalog); // Wyświetlanie informacji o katalogu
             catalog.ShowAllItems(); // Wyświetlanie wszystkich elementów w katalogu
 
-            Console.ReadKey();
-
             //----------============ Zad 01 ============----------↑
+
+
+            //----------============ Zad 02 ============----------↓
+
+            //--- find position
+            string searchedValue = "Agile C#";
+            Item foundedItemById = catalog.FindItem(item => item.Id == 1); // Wyszukuje element o określonym ID.
+            Item foundedItemByTitle = catalog.FindItem(item => item.Title == searchedValue); // Wyszukuje element po tytule.
+            Item foundedItemByDateRange = catalog.FindItem(item => item.DateOfIssue >= new DateTime(2014, 12, 31) &&
+            item.DateOfIssue <= new DateTime(2015, 12, 31)); // Wyszukuje elementy wydane w określonym zakresie dat.
+            Console.WriteLine("++++++++++++++++++++++++++++++++++");
+            Console.WriteLine(foundedItemById); // Wyświetla znalezione elementy.
+            Console.WriteLine(foundedItemByTitle);
+            Console.WriteLine(foundedItemByDateRange);
+
+            Item foundedItemByIdOld = catalog.FindItemBy(1); // Wyszukuje element o określonym ID za pomocą starszego sposobu.
+            Item foundedItemByTitleOld = catalog.FindItemBy(searchedValue); // Wyszukuje element po tytule za pomocą starszego sposobu.
+            Console.WriteLine("Found old way");
+            Console.WriteLine(foundedItemByIdOld);
+            Console.WriteLine(foundedItemByTitleOld);
+            Console.WriteLine("++++++++++++++++++++++++++++++++++");
+
+            Person librarian = new Librarian("John", "Kowalsky", DateTime.Now.Date, 2000); // Tworzy obiekt bibliotekarza.
+            Library library = new Library("Czestochowa, Armii Krajowej 36", new List<Librarian>(), new List<Catalog>()); // Tworzy obiekt biblioteki.
+            library.AddLibrarian((Librarian)librarian); // Dodaje bibliotekarza do biblioteki.
+            library.ShowAllLibrarians(); // Wyświetla wszystkich bibliotekarzy.
+
+            Catalog catalog2 = new Catalog("Novels", new List<Item>()); // Tworzy nowy katalog dla powieści.
+            library.AddCatalog(catalog2); // Dodaje nowy katalog do biblioteki.
+            library.AddCatalog(catalog); // Dodaje katalog do biblioteki.
+
+            Item newItem = new Book("Song of Ice and Fire", 4, "Publisher", new DateTime(2011, 1, 1), 800,
+             new List<Author>() { author }); // Tworzy nową książkę.
+            library.AddItem(newItem, "Novels"); // Dodaje nową książkę do katalogu powieści.
+
+            Console.WriteLine(library); // Wyświetla informacje o bibliotece.
+            Console.WriteLine("===========================All Items=======================\r\n");
+            library.ShowAllItems(); // Wyświetla wszystkie elementy w bibliotece.
+            Console.WriteLine("===========================FIND BY=======================\r\n");
+
+            var foundedById = library.FindItemBy(4); // Wyszukuje element o określonym ID w bibliotece.
+            var foundedByTitle = library.FindItemBy(searchedValue); // Wyszukuje element po tytule w bibliotece.
+            var foundedByLambda = library.FindItem(x => x.Publisher == "Springer"); // Wyszukuje elementy w bibliotece za pomocą predykatu.
+            Console.WriteLine(foundedById);
+            Console.WriteLine(foundedByTitle);
+            Console.WriteLine(foundedByLambda);
+
+            //----------============ Zad 02 ============----------↑
+
+            Console.ReadKey();
         }
     }
 }
+
