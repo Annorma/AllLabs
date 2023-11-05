@@ -89,23 +89,21 @@ namespace Lab_03_Zad_01_02_New
                     Console.WriteLine(item);
                 }
             }
-
-            public Item FindItemBy(int id)
+            public Item FindItem(Expression<Func<Item, bool>> predicate)
             {
-                // Metoda znajduje element w katalogu po identyfikatorze.
-                return Items.FirstOrDefault(item => item.Id == id);
+                // Metoda znajduje element w katalogu na podstawie określonego predykatu.
+                return Items.FirstOrDefault(item => predicate.Compile()(item));
             }
-
             public Item FindItemBy(string title)
             {
                 // Metoda znajduje element w katalogu po tytule.
                 return Items.FirstOrDefault(item => item.Title == title);
             }
 
-            public Item FindItem(Expression<Func<Item, bool>> predicate)
+            public Item FindItemBy(int id)
             {
-                // Metoda znajduje element w katalogu na podstawie określonego predykatu.
-                return Items.FirstOrDefault(item => predicate.Compile()(item));
+                // Metoda znajduje element w katalogu po identyfikatorze.
+                return Items.FirstOrDefault(item => item.Id == id);
             }
         }
 
@@ -195,7 +193,6 @@ namespace Lab_03_Zad_01_02_New
             {
                 Console.WriteLine(ToString());
             }
-
         }
 
         public class Author : Person
