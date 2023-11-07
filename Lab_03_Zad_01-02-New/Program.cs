@@ -89,18 +89,18 @@ namespace Lab_03_Zad_01_02_New
                     Console.WriteLine(item);
                 }
             }
-            public Item FindItem(Expression<Func<Item, bool>> predicate)
+            public Item? FindItem(Expression<Func<Item, bool>> predicate)
             {
                 // Metoda znajduje element w katalogu na podstawie określonego predykatu.
                 return Items.FirstOrDefault(item => predicate.Compile()(item));
             }
-            public Item FindItemBy(string title)
+            public Item? FindItemBy(string title)
             {
                 // Metoda znajduje element w katalogu po tytule.
                 return Items.FirstOrDefault(item => item.Title == title);
             }
 
-            public Item FindItemBy(int id)
+            public Item? FindItemBy(int id)
             {
                 // Metoda znajduje element w katalogu po identyfikatorze.
                 return Items.FirstOrDefault(item => item.Id == id);
@@ -245,9 +245,9 @@ namespace Lab_03_Zad_01_02_New
             // Interfejs definiuje operacje związane z zarządzaniem przedmiotami w bibliotece.
 
             void ShowAllItems(); // Metoda wyświetlająca wszystkie przedmioty w bibliotece.
-            Item FindItemBy(int id); // Metoda wyszukująca przedmiot po identyfikatorze.
-            Item FindItemBy(string title); // Metoda wyszukująca przedmiot po tytule.
-            Item FindItem(Expression<Func<Item, bool>> predicate); // Metoda wyszukująca przedmiot za pomocą predykatu.
+            Item? FindItemBy(int id); // Metoda wyszukująca przedmiot po identyfikatorze.
+            Item? FindItemBy(string title); // Metoda wyszukująca przedmiot po tytule.
+            Item? FindItem(Expression<Func<Item, bool>> predicate); // Metoda wyszukująca przedmiot za pomocą predykatu.
         }
 
         public class Library : IItemManagment
@@ -315,17 +315,17 @@ namespace Lab_03_Zad_01_02_New
                 }
             }
 
-            public Item FindItemBy(int id) // Metoda znajduje element w bibliotece po identyfikatorze.
+            public Item? FindItemBy(int id) // Metoda znajduje element w bibliotece po identyfikatorze.
             {
                 return Catalogs.SelectMany(c => c.Items).FirstOrDefault(item => item.Id == id);
             }
 
-            public Item FindItemBy(string title) // Metoda znajduje element w bibliotece po tytule.
+            public Item? FindItemBy(string title) // Metoda znajduje element w bibliotece po tytule.
             {
                 return Catalogs.SelectMany(c => c.Items).FirstOrDefault(item => item.Title == title);
             }
 
-            public Item FindItem(Expression<Func<Item, bool>> predicate) // Metoda znajduje element w bibliotece na podstawie określonego predykatu.
+            public Item? FindItem(Expression<Func<Item, bool>> predicate) // Metoda znajduje element w bibliotece na podstawie określonego predykatu.
             {
                 return Catalogs.SelectMany(c => c.Items).FirstOrDefault(item => predicate.Compile()(item));
             }
@@ -333,6 +333,29 @@ namespace Lab_03_Zad_01_02_New
             public override string ToString() // Metoda zwracająca reprezentację tekstową biblioteki.
             {
                 return $"Library | {Adress}";
+            }
+        }
+
+        public class City
+        {
+            public int Index { get; set; }
+            public string Name { get; set; }
+            public IList<Library> Libraries { get; set; }
+            public City()
+            {
+                Index = 0;
+                Name = string.Empty;
+                Libraries = new List<Library>();
+            }
+            public City(int index, string name, IList<Library> libraries)
+            {
+                Index = index;
+                Name = name;
+                Libraries = libraries;
+            }
+            public override string ToString()
+            {
+                return $"City | {Name} {Index}";
             }
         }
 
@@ -369,17 +392,17 @@ namespace Lab_03_Zad_01_02_New
 
             //--- find position
             string searchedValue = "Agile C#";
-            Item foundedItemById = catalog.FindItem(item => item.Id == 1); // Wyszukuje element o określonym ID.
-            Item foundedItemByTitle = catalog.FindItem(item => item.Title == searchedValue); // Wyszukuje element po tytule.
-            Item foundedItemByDateRange = catalog.FindItem(item => item.DateOfIssue >= new DateTime(2014, 12, 31) &&
+            Item? foundedItemById = catalog.FindItem(item => item.Id == 1); // Wyszukuje element o określonym ID.
+            Item? foundedItemByTitle = catalog.FindItem(item => item.Title == searchedValue); // Wyszukuje element po tytule.
+            Item? foundedItemByDateRange = catalog.FindItem(item => item.DateOfIssue >= new DateTime(2014, 12, 31) &&
             item.DateOfIssue <= new DateTime(2015, 12, 31)); // Wyszukuje elementy wydane w określonym zakresie dat.
             Console.WriteLine("++++++++++++++++++++++++++++++++++");
             Console.WriteLine(foundedItemById); // Wyświetla znalezione elementy.
             Console.WriteLine(foundedItemByTitle);
             Console.WriteLine(foundedItemByDateRange);
 
-            Item foundedItemByIdOld = catalog.FindItemBy(1); // Wyszukuje element o określonym ID za pomocą starszego sposobu.
-            Item foundedItemByTitleOld = catalog.FindItemBy(searchedValue); // Wyszukuje element po tytule za pomocą starszego sposobu.
+            Item? foundedItemByIdOld = catalog.FindItemBy(1); // Wyszukuje element o określonym ID za pomocą starszego sposobu.
+            Item? foundedItemByTitleOld = catalog.FindItemBy(searchedValue); // Wyszukuje element po tytule za pomocą starszego sposobu.
             Console.WriteLine("Found old way");
             Console.WriteLine(foundedItemByIdOld);
             Console.WriteLine(foundedItemByTitleOld);
