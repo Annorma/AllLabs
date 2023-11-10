@@ -5,26 +5,26 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Net;
 using System.Runtime.CompilerServices;
-using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab_04_Zad_01_02
+namespace Lab_04_Zad_01_02_New
 {
+    //----------============ Zad 02 ============----------↓
 
     public interface IDisplayable
     {
-        public abstract string ToString();
+        string ToString();
     }
 
     public static class DisplayActionExtensions
     {
-        public static void Print(this IDisplayable obj)
+        public static void Print<T>(this T obj)
         {
-            Console.WriteLine(obj.ToString());
+            Console.WriteLine(obj != null ? obj.ToString() : "null");
         }
 
-        public static void Print(this IList<IDisplayable> list)
+        public static void Print<T>(this IList<T> list)
         {
             foreach (var item in list)
             {
@@ -37,60 +37,121 @@ namespace Lab_04_Zad_01_02
 
     public static class CrudActionExtensions
     {
-        public static IList<IDisplayable> Set(this IContainer containerObject)
+        public static IList<T> Set<T>(this IContainer containerObject)
         {
-            // Tu możesz dodać implementację, która ustawia zawartość kontenera.
-            return new List<IDisplayable>();
+            var collectionProperty = containerObject.GetType().GetProperties().FirstOrDefault(p => p.PropertyType == typeof(IList<T>));
+            if (collectionProperty != null)
+            {
+                return (IList<T>)collectionProperty.GetValue(containerObject);
+            }
+
+            return null;
         }
 
-        public static void ForEach(this IList<IDisplayable> list, Action<IDisplayable> action)
+        public static void ForEach<T>(this IList<T> list, Action<T> action)
         {
-            foreach (var item in list)
+            var collectionProperty = list.GetType().GetProperties().FirstOrDefault(p => p.PropertyType == typeof(IList<T>));
+            if (collectionProperty != null)
             {
-                action(item);
+                var collection = (IList<T>)collectionProperty.GetValue(list);
+                foreach (var item in collection)
+                {
+                    action(item);
+                }
             }
         }
 
-        public static T Get<T>(this IContainer container, Func<IDisplayable, bool> searchPredicate)
+        public static T Get<T>(this IContainer container, Func<T, bool>? searchPredicate = null)
         {
-            return container.Set().OfType<T>().FirstOrDefault(searchPredicate);
-        }
-
-        public static IList<IDisplayable> GetList(this IContainer container, Func<IDisplayable, bool> searchPredicate)
-        {
-            return container.Set().Where(searchPredicate).ToList();
-        }
-
-        public static IContainer Add(this IContainer container, IDisplayable obj)
-        {
-            var list = container.Set().ToList();
-            list.Add(obj);
-            return list;
-        }
-
-        public static bool Remove<T>(this IContainer container, Func<IDisplayable, bool> searchFn)
-        {
-            var list = container.Set().ToList();
-            var itemToRemove = list.FirstOrDefault(searchFn);
-            if (itemToRemove != null)
+            var collectionProperty = container.GetType().GetProperties().FirstOrDefault(p => p.PropertyType == typeof(IList<T>));
+            if (collectionProperty != null)
             {
-                list.Remove(itemToRemove);
-                return true;
+                var collection = (IList<T>)collectionProperty.GetValue(container);
+                if (searchPredicate != null)
+                {
+                    return collection.FirstOrDefault(searchPredicate);
+                }
+                else
+                {
+                    return collection.FirstOrDefault();
+                }
             }
+
+            return default(T);
+        }
+
+        public static IList<T> GetList<T>(this IContainer container, Func<T, bool>? searchPredicate = null)
+        {
+            var collectionProperty = container.GetType().GetProperties().FirstOrDefault(p => p.PropertyType == typeof(IList<T>));
+            if (collectionProperty != null)
+            {
+                var collection = (IList<T>)collectionProperty.GetValue(container);
+                if (searchPredicate != null)
+                {
+                    return collection.Where(searchPredicate).ToList();
+                }
+                else
+                {
+                    return collection.ToList();
+                }
+            }
+
+            return new List<T>();
+        }
+
+        public static T Add<T>(this IContainer container, T obj)
+        {
+            var collectionProperty = obj.GetType().GetProperties().FirstOrDefault(p => p.PropertyType == typeof(IList<T>));
+            if (collectionProperty != null)
+            {
+                var collection = (IList<T>)collectionProperty.GetValue(obj);
+                collection.Add(obj);
+            }
+
+            return obj;
+        }
+
+        public static bool Remove<T>(this IContainer container, Func<T, bool> searchFn)
+        {
+            var collectionProperty = container.GetType().GetProperties().FirstOrDefault(p => p.PropertyType == typeof(IList<T>));
+            if (collectionProperty != null)
+            {
+                var collection = (IList<T>)collectionProperty.GetValue(container);
+                var itemsToRemove = collection.Where(searchFn).ToList();
+                foreach (var item in itemsToRemove)
+                {
+                    collection.Remove(item);
+                }
+
+                return itemsToRemove.Count > 0;
+            }
+
             return false;
         }
 
-        public static IContainer AddRange(this IContainer container, IList<IDisplayable> listOfElements)
+        public static IContainer AddRange<T>(this IContainer container, IList<T> listOfElements)
         {
-            var list = container.Set().ToList();
-            list.AddRange(listOfElements);
-            return list;
+            var collectionProperty = container.GetType().GetProperties().FirstOrDefault(p => p.PropertyType == typeof(IList<T>));
+            if (collectionProperty != null)
+            {
+                var collection = (IList<T>)collectionProperty.GetValue(container);
+                foreach (var item in listOfElements)
+                {
+                    collection.Add(item);
+                }
+            }
+
+            return container;
         }
     }
 
+    //----------============ Zad 02 ============----------↑
+
     internal class Program
     {
-        public abstract class Person
+        //----------============ Zad 01 ============----------↓
+
+        public abstract class Person : IDisplayable, IContainer
         {
             public string FirstName { get; set; }
             public string LastName { get; set; }
@@ -113,7 +174,7 @@ namespace Lab_04_Zad_01_02
         {
             public string AcademicTitle { get; set; }
             public string Position { get; set; }
-            public Lecturer(string firstName, string lastName, DateTime dateOfBirth, string academicTitle, string position) : base (firstName, lastName, dateOfBirth)
+            public Lecturer(string firstName, string lastName, DateTime dateOfBirth, string academicTitle, string position) : base(firstName, lastName, dateOfBirth)
             {
                 AcademicTitle = academicTitle;
                 Position = position;
@@ -128,13 +189,13 @@ namespace Lab_04_Zad_01_02
         public class Student : Person
         {
             private static int id;
-            public IList<FinalGrade> Grades { get; set; }
-            public int Semestr {  get; set; }
+            public IList<FinalGrade> Grades { get; set; } = new List<FinalGrade>();
+            public int Semestr { get; set; }
             public int Group { get; set; }
             public int IndexId { get; set; }
             public string Specialization { get; set; }
             public double AverageGrades { get; }
-            public Student(string firstName, string lastName, DateTime dateOfBirth, string specialization, int group, int semestr = 1) : base (firstName, lastName, dateOfBirth)
+            public Student(string firstName, string lastName, DateTime dateOfBirth, string specialization, int group, int semestr = 1) : base(firstName, lastName, dateOfBirth)
             {
                 Semestr = semestr;
                 Group = group;
@@ -183,11 +244,11 @@ namespace Lab_04_Zad_01_02
             }
         }
 
-        public class OrganizationUnit
+        public class OrganizationUnit : IDisplayable, IContainer
         {
             public string Name { get; set; }
             public string Address { get; set; }
-            public IList<Lecturer> Lecturers { get; set; }
+            public IList<Lecturer> Lecturers { get; set; } = new List<Lecturer>();
             public OrganizationUnit(string name, string address, IList<Lecturer> lecturers)
             {
                 Name = name;
@@ -208,13 +269,13 @@ namespace Lab_04_Zad_01_02
         }
 
 
-        public class Department
+        public class Department : IDisplayable, IContainer
         {
             public string Name { get; set; }
             public Person Dean { get; set; }
-            public IList<OrganizationUnit> OrganizationUnits { get; set; }
-            public IList<Subject> Subjects { get; set; }
-            public IList<Student> Students { get; set; }
+            public IList<OrganizationUnit> OrganizationUnits { get; set; } = new List<OrganizationUnit>();
+            public IList<Subject> Subjects { get; set; } = new List<Subject>();
+            public IList<Student> Students { get; set; } = new List<Student>();
             public Department(string name, Person dean, IList<Subject> subjects, IList<Student> students)
             {
                 Name = name;
@@ -229,8 +290,13 @@ namespace Lab_04_Zad_01_02
             }
         }
 
+        //----------============ Zad 01 ============----------↑
+
         static void Main(string[] args)
         {
+            //----------============ Zad 01 ============----------↓
+
+            Console.WriteLine("----------============ Zad 01 ============----------↓\n");
             Student student1 = new Student("Jan", "Kowalski", new DateTime(1995, 1, 1), "Informatyka", 1);
             Student student2 = new Student("Piotr", "Nowak", new DateTime(1990, 1, 1), "Matematyka", 3, 2);
             Person student3 = new Student("Adam", "Bedrnarski", new DateTime(1993, 1, 1), "Informatyka", 1, 2);
@@ -269,12 +335,18 @@ namespace Lab_04_Zad_01_02
             Department department = new Department("Wydział Inżynierii Mechanicznej i Informatyki", dean, new List<Subject>() { subject1, subject2 }, new List<Student>() { student1, student2, (Student)student3 });
             Console.WriteLine(department);
 
+            //----------============ Zad 01 ============----------↑
+
+
+            //----------============ Zad 02 ============----------↓
+
+            Console.WriteLine("\n----------============ Zad 02 ============----------↓\n");
 
             student1.Add(grade1);
             student2.AddRange(new List<FinalGrade> { grade2, grade3 });
             ((Student)student3).AddRange(new List<FinalGrade> { grade4 });
-            Department department2 = new Department("WE", new Lecturer("Jan", "Nowak", DateTime.Now.AddYears(-56), "dr hab.", "dziekan"), new List<Subject>() { subject3, subject4 },new List<Student>() { student1, student2, (Student)student3 });
-            department2.AddRange(new List<OrganizationUnit> { new OrganizationUnit("IOO", "Rolnicza 2", new List<Lecturer>{lecturer5}), new OrganizationUnit("SKL", "Miedziana 13", new List<Lecturer>{lecturer6})});
+            Department department2 = new Department("WE", new Lecturer("Jan", "Nowak", DateTime.Now.AddYears(-56), "dr hab.", "dziekan"), new List<Subject>() { subject3, subject4 }, new List<Student>() { student1, student2, (Student)student3 });
+            department2.AddRange(new List<OrganizationUnit> { new OrganizationUnit("IOO", "Rolnicza 2", new List<Lecturer> { lecturer5 }), new OrganizationUnit("SKL", "Miedziana 13", new List<Lecturer> { lecturer6 }) });
 
             department2.Add(new Student("Jacek", "Bednarski", new DateTime(1989, 2, 12), "Matematyka", 1).AddRange(new List<FinalGrade> { grade7, grade8 }) as Student);
             department2.Add(new Student("Marek", "Wiśniewski", new DateTime(2001, 12, 1), "Matematyka", 1).AddRange(new List<FinalGrade> { grade5, grade6 }) as Student);
@@ -286,12 +358,12 @@ namespace Lab_04_Zad_01_02
             department2.Add(new Subject("Podstawy sieci komputerowych", "Informatyka", 2, 30));
             var organizationUnit = department2.Get<OrganizationUnit>(x => x.Name == "SKL");
             organizationUnit.Print();
-            department2.Get<OrganizationUnit>(x => x.Name == "SKL")
-            .Add(new Lecturer("Maria", "Nowak", new DateTime(1912, 12, 1), "mgr", "Lektor"));
+            department2.Get<OrganizationUnit>(x => x.Name == "SKL").Add(new Lecturer("Maria", "Nowak", new DateTime(1912, 12, 1), "mgr", "Lektor"));
             organizationUnit.Print();
             department2.Get<OrganizationUnit>(x => x.Name == "SKL").Remove<Lecturer>(l => l.FirstName == "Maria");
-            department2.GetList<OrganizationUnit>(ou => ou.Name == "SKL") .Print();
+            department2.GetList<OrganizationUnit>(ou => ou.Name == "SKL").Print();
 
+            //----------============ Zad 02 ============----------↑
 
 
             Console.ReadKey();
