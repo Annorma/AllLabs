@@ -302,7 +302,6 @@ namespace Lab_04_Zad_01_02_New
                 foreach (var lecturer in Lecturers)
                 {
                     lecturers += lecturer.ToString() + "\n";
-
                 }
                 return $"OrganizationUnit | {Name} {Address} {lecturers}";
             }

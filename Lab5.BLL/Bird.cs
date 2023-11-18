@@ -19,5 +19,9 @@ namespace Lab5.BLL
         {
             Console.WriteLine($"Bird can fly max: {Wingspan * Endurance} km");
         }
+        public override string ToString()
+        {
+            return $"{base.ToString()} {Wingspan} {Endurance}";
+        }
     }
 }
