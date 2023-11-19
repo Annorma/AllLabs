@@ -1,26 +1,27 @@
-﻿using System;
+﻿using Generic.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace Lab5.BLL
 {
-    public class Employee
+    public class Employee : IDisplayable, IContainer
     {
-        public string Name { get; set; }
-        public string Surname { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public DateTime DateOfBirth { get; set; }
         public DateTime HireDate { get; set; }
-        public Employee(string name, string surname, DateTime dateOfBirth, DateTime hireDate)
+        public Employee(string firstName, string lastName, DateTime dateOfBirth, DateTime hireDate)
         {
-            Name = name;
-            Surname = surname;
+            FirstName = firstName;
+            LastName = lastName;
             DateOfBirth = dateOfBirth;
             HireDate = hireDate;
         }
         public override string ToString()
         {
-            return $"{Name} {Surname} {DateOfBirth.ToShortDateString()} {HireDate.ToShortDateString()}";
+            return $"{FirstName} {LastName} {DateOfBirth.ToShortDateString()} {HireDate.ToShortDateString()}";
         }
     }
 }

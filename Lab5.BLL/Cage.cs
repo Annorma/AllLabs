@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using Generic.Extensions;
 using System.Linq;
 using System.Text;
 
 namespace Lab5.BLL
 {
-    public class Cage
+    public class Cage : IDisplayable, IContainer
     {
         public int Capacity { get; set; }
         public bool IsClear { get; set; }

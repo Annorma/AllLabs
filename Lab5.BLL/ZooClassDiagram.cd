@@ -35,13 +35,15 @@
       <HashCode>AAAAAAAAAAAAAAAEAAAQAAACAAAAgAAAAAAAAAAAAAA=</HashCode>
       <FileName>Cage.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Lab5.BLL.Zoo">
     <Position X="7.5" Y="6.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAEAAAQAAQECAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAEAgAQAAQECAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Zoo.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Lab5.BLL.Employee">
     <Position X="10.25" Y="3.75" Width="1.5" />
@@ -49,6 +51,7 @@
       <HashCode>AAAAAAAAAAAAAAAEAAAAAAQABCAQAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Employee.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Lab5.BLL.CageSupervisor">
     <Position X="7.5" Y="3.75" Width="1.5" />

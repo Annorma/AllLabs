@@ -417,8 +417,7 @@ namespace Lab_03_Zad_01_02_New
             library.AddCatalog(catalog2); // Dodaje nowy katalog do biblioteki.
             library.AddCatalog(catalog); // Dodaje katalog do biblioteki.
 
-            Item newItem = new Book("Song of Ice and Fire", 4, "Publisher", new DateTime(2011, 1, 1), 800,
-             new List<Author>() { author }); // Tworzy nową książkę.
+            Item newItem = new Book("Song of Ice and Fire", 4, "Publisher", new DateTime(2011, 1, 1), 800, new List<Author>() { author }); // Tworzy nową książkę.
             library.AddItem(newItem, "Novels"); // Dodaje nową książkę do katalogu powieści.
 
             Console.WriteLine(library); // Wyświetla informacje o bibliotece.

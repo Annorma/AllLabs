@@ -1,12 +1,12 @@
 ﻿using System;
+using Generic.Extensions;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
 namespace Lab5.BLL
 {
-    public class Zoo
+    public class Zoo : IDisplayable, IContainer
     {
         public string Name { get; set; }
         public IList<Employee> Employees { get; set; } = new List<Employee>();
