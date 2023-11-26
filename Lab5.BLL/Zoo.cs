@@ -21,16 +21,45 @@ namespace Lab5.BLL
             Animals = animals;
         }
 
-        public Employee HireEmployee(string name, string surname, DateTime dateOfBirth)
+        public CageSupervisor HireEmployee(string name, string surname, DateTime dateOfBirth)
         {
-            Employee newEmployee = new Employee(name, surname, dateOfBirth, DateTime.Now);
+            CageSupervisor newEmployee = new CageSupervisor(name, surname, dateOfBirth, DateTime.Now, new List<Cage>());
             Employees.Add(newEmployee);
             return newEmployee;
         }
 
+        public Cage BuildCage(int capacity, bool isClear)
+        {
+            Cage newCage = new Cage(capacity, isClear, new List<Animal>());
+            Cages.Add(newCage);
+            return newCage;
+        }
+        public void ExpandCage(Cage cage, int capacity)
+        {
+            Cages.FirstOrDefault(cage).Capacity += capacity;
+        }
+
+
         public override string ToString()
         {
-            return $"Zoo | {Name}";
+            string employees = "\nEmployees:\n";
+            foreach (var employee in Employees)
+            {
+                employees += employee.ToString() + "\n";
+            }
+
+            string cages = "\nCages:\n";
+            foreach (var cage in Cages)
+            {
+                cages += cage.ToString() + "\n";
+            }
+
+            string animals = "\nAnimals:\n";
+            foreach (var animal in Animals)
+            {
+                animals += animal.ToString() + "\n";
+            }
+            return $"Zoo | {Name} {employees} {cages} {animals}";
         }
     }
 }

@@ -14,7 +14,12 @@ namespace Lab5.BLL
         }
         public override string ToString()
         {
-            return base.ToString();
+            string cages = "\nCages:\n";
+            foreach (Cage cage in Cages)
+            {
+                cages += cage.ToString() + "\n"; 
+            }   
+            return $"{base.ToString()} {cages}";
         }
     }
 }

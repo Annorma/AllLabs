@@ -15,7 +15,7 @@ namespace Lab5.BLL
 
         public override string ToString()
         {
-            return $"{base.ToString} {IsPoisoned}";
+            return $"{base.ToString()} {IsPoisoned}";
         }
     }
 }
