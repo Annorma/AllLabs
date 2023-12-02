@@ -1,0 +1,51 @@
+﻿<Window x:Class="Lab_07_Calculator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lab_07_Calculator"
+        mc:Ignorable="d"
+        Title="Calculator" Height="410" Width="330">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <TextBox x:Name="calculationsTextBox" Margin="2,0,2,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.ColumnSpan="4" TextAlignment="Right"/>
+        <TextBox x:Name="rezultTextBox" Grid.ColumnSpan="4" Margin="2,2,2,2" FontSize="45" HorizontalAlignment="Stretch" Grid.Row="1" Grid.RowSpan="1" TextAlignment="Right">0</TextBox>
+        <Button x:Name="ceBtn" Grid.Row="2" Margin="1,1,1,1" FontWeight="Normal" FontSize="25" Click="ceBtn_Click">CE</Button>
+        <Button x:Name="cBtn" Grid.Row="2" Grid.Column="1" Margin="1,1,1,1" FontWeight="Normal" FontSize="25" Click="cBtn_Click">C</Button>
+        <Button x:Name="deleteBtn" Grid.Row="2" Grid.Column="2" Margin="1,1,1,1" FontSize="25" FontWeight="Normal" Click="deleteBtn_Click">&lt;</Button>
+        <Button x:Name="divideBtn" Grid.Row="2" Grid.Column="3" Margin="1,1,1,1" FontSize="25" FontWeight="Normal" Click="divideBtn_Click">/</Button>
+
+        <Button x:Name="sevenBtn" Grid.Row="3" Margin="1,1,1,1" FontSize="25" Click="sevenBtn_Click">7</Button>
+        <Button x:Name="eightBtn" Grid.Row="3" Grid.Column="1" Margin="1,1,1,1" FontSize="25" Click="eightBtn_Click">8</Button>
+        <Button x:Name="nineBtn" Grid.Row="3" Grid.Column="2" Margin="1,1,1,1" FontSize="25" Click="nineBtn_Click">9</Button>
+        <Button x:Name="multiplyBtn" Grid.Row="3" Grid.Column="3" Margin="1,1,1,1" FontSize="25" Click="multiplyBtn_Click">*</Button>
+
+        <Button x:Name="fourBtn" Grid.Row="4" Margin="1,1,1,1" FontSize="25" Click="fourBtn_Click">4</Button>
+        <Button x:Name="fiveBtn" Grid.Row="4" Grid.Column="1" Margin="1,1,1,1" FontSize="25" Click="fiveBtn_Click">5</Button>
+        <Button x:Name="sixBtn" Grid.Row="4" Grid.Column="2" Margin="1,1,1,1" FontSize="25" Click="sixBtn_Click">6</Button>
+        <Button x:Name="minusBtn" Grid.Row="4" Grid.Column="3" Margin="1,1,1,1" FontSize="25" Click="minusBtn_Click">-</Button>
+
+        <Button x:Name="oneBtn" Grid.Row="5" Margin="1,1,1,1" FontSize="25" Click="oneBtn_Click">1</Button>
+        <Button x:Name="twoBtn" Grid.Row="5" Grid.Column="1" Margin="1,1,1,1" FontSize="25" Click="twoBtn_Click">2</Button>
+        <Button x:Name="threeBtn" Grid.Row="5" Grid.Column="2" Margin="1,1,1,1" FontSize="25" Click="threeBtn_Click">3</Button>
+        <Button x:Name="plusBtn" Grid.Row="5" Grid.Column="3" Margin="1,1,1,1" FontSize="25" Click="plusBtn_Click">+</Button>
+
+        <Button x:Name="dotBtn" Grid.Row="6" Margin="1,1,1,1" FontSize="25" Click="dotBtn_Click">.</Button>
+        <Button x:Name="zeroBtn" Grid.Row="6" Grid.Column="1" Margin="1,1,1,1" FontSize="25" Click="zeroBtn_Click">0</Button>
+        <Button x:Name="equalBtn" Grid.Row="6" Grid.Column="2" Margin="1,1,1,1" Grid.ColumnSpan="2" FontSize="25" Click="equalBtn_Click">=</Button>
+    </Grid>
+</Window>
