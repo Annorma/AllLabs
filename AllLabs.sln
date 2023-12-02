@@ -17,9 +17,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Urzadzenie", "Urzadzenie\Ur
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lab_04_Zad_01-02-New", "Lab_04_Zad_01-02-New\Lab_04_Zad_01-02-New.csproj", "{D33D506B-D95B-4B6C-9A56-9A7F379CBC21}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lab5.App", "Lab5.App\Lab5.App.csproj", "{BA8800BC-566A-47ED-8EDE-AA7C4F4EC950}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lab_05.App", "Lab5.App\Lab_05.App.csproj", "{BA8800BC-566A-47ED-8EDE-AA7C4F4EC950}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lab5.BLL", "Lab5.BLL\Lab5.BLL.csproj", "{BC9D31CE-9559-4C9B-93D1-2E531ED53BFE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lab_05.BLL", "Lab5.BLL\Lab_05.BLL.csproj", "{BC9D31CE-9559-4C9B-93D1-2E531ED53BFE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Generic.Extensions", "Generic.Extensions\Generic.Extensions.csproj", "{68AE3CD1-6AEF-402E-9A52-721734F9A18A}"
 EndProject
@@ -27,9 +27,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Do_Kolokwium_01", "Do_Kolok
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kolokwium_01", "Kolokwium_01\Kolokwium_01.csproj", "{E5E8C9EE-9441-4EC0-AA4B-6AAB45B12CBF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab_07_Calculator", "Lab_07_Calculator\Lab_07_Calculator.csproj", "{0663508D-5894-46A3-AE38-6EA5CBB89C94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lab_07_Calculator", "Lab_07_Calculator\Lab_07_Calculator.csproj", "{0663508D-5894-46A3-AE38-6EA5CBB89C94}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab_07.BLL", "Lab_7.BLL\Lab_07.BLL.csproj", "{B3D74E40-0B90-414D-AA7D-1638E4934CAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lab_07.BLL", "Lab_7.BLL\Lab_07.BLL.csproj", "{B3D74E40-0B90-414D-AA7D-1638E4934CAD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
