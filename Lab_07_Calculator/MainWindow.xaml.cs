@@ -16,149 +16,55 @@ using Lab_07.BLL;
 
 namespace Lab_07_Calculator
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
+            this.PreviewKeyDown += Window_PreviewKeyDown;
         }
+
+        MathOperations mathOperations = MathOperations.Instance;
+        
         private double a = 0;
         private double b = 0;
-        private int count = 0;
 
-        private void Calculate()
+        private void NumberButtonClick(object sender, RoutedEventArgs e)
         {
-            MathOperations mathOperations = MathOperations.Instance;
-            
-            if (resultTextBox.Text != "" && calculationsTextBox.Text != "" || resultTextBox.Text != null && calculationsTextBox != null)
-            {
-                switch (count)
-                {
-                    case 1:
-                        b = double.Parse(resultTextBox.Text);
-                        resultTextBox.Text = mathOperations.Plus(a, b).ToString();
-                        break;
-                    case 2:
-                        b = double.Parse(resultTextBox.Text);
-                        resultTextBox.Text = mathOperations.Minus(a, b).ToString();
-                        break;
-                    case 3:
-                        b = double.Parse(resultTextBox.Text);
-                        resultTextBox.Text = mathOperations.Multiply(a, b).ToString();
-                        break;
-                    case 4:
-                        b = double.Parse(resultTextBox.Text);
-                        resultTextBox.Text = mathOperations.Divide(a, b).ToString();
-                        break;
+            Button button = (Button)sender;
+            string? buttonText = button.Content.ToString();
 
-                    default:
-                        break;
-                }
-            }
-            else { resultTextBox.Text = "Error"; }
-        }
-
-        private void oneBtn_Click(object sender, RoutedEventArgs e)
-        {
             if (resultTextBox.Text == "0" && resultTextBox != null)
             {
-                resultTextBox.Text = "1";
+                resultTextBox.Text = buttonText;
             }
-            else { resultTextBox.Text += "1"; }
+            else if (resultTextBox != null)
+            {
+                resultTextBox.Text += buttonText;
+            }
         }
 
-        private void twoBtn_Click(object sender, RoutedEventArgs e)
-        {
-            if (resultTextBox.Text == "0" && resultTextBox != null)
-            {
-                resultTextBox.Text = "2";
-            }
-            else { resultTextBox.Text += "2"; }
-        }
+        private void oneBtn_Click(object sender, RoutedEventArgs e) => NumberButtonClick(sender, e);
 
-        private void threeBtn_Click(object sender, RoutedEventArgs e)
-        {
-            if (resultTextBox.Text == "0" && resultTextBox != null)
-            {
-                resultTextBox.Text = "3";
-            }
-            else { resultTextBox.Text += "3"; }
-        }
+        private void twoBtn_Click(object sender, RoutedEventArgs e) => NumberButtonClick(sender, e);
 
-        private void fourBtn_Click(object sender, RoutedEventArgs e)
-        {
-            if (resultTextBox.Text == "0" && resultTextBox != null)
-            {
-                resultTextBox.Text = "4";
-            }
-            else { resultTextBox.Text += "4"; }
-        }
+        private void threeBtn_Click(object sender, RoutedEventArgs e) => NumberButtonClick(sender, e);
 
-        private void fiveBtn_Click(object sender, RoutedEventArgs e)
-        {
-            if (resultTextBox.Text == "0" && resultTextBox != null)
-            {
-                resultTextBox.Text = "5";
-            }
-            else { resultTextBox.Text += "5"; }
-        }
+        private void fourBtn_Click(object sender, RoutedEventArgs e) => NumberButtonClick(sender, e);
 
-        private void sixBtn_Click(object sender, RoutedEventArgs e)
-        {
-            if (resultTextBox.Text == "0" && resultTextBox != null)
-            {
-                resultTextBox.Text = "6";
-            }
-            else { resultTextBox.Text += "6"; }
-        }
+        private void fiveBtn_Click(object sender, RoutedEventArgs e) => NumberButtonClick(sender, e);
 
-        private void sevenBtn_Click(object sender, RoutedEventArgs e)
-        {
-            if (resultTextBox.Text == "0" && resultTextBox != null)
-            {
-                resultTextBox.Text = "7";
-            }
-            else { resultTextBox.Text += "7"; }
-        }
+        private void sixBtn_Click(object sender, RoutedEventArgs e) => NumberButtonClick(sender, e);
 
-        private void eightBtn_Click(object sender, RoutedEventArgs e)
-        {
-            if (resultTextBox.Text == "0" && resultTextBox != null)
-            {
-                resultTextBox.Text = "8";
-            }
-            else { resultTextBox.Text += "8"; }
-        }
+        private void sevenBtn_Click(object sender, RoutedEventArgs e) => NumberButtonClick(sender, e);
 
-        private void nineBtn_Click(object sender, RoutedEventArgs e)
-        {
-            if (resultTextBox.Text == "0" && resultTextBox != null)
-            {
-                resultTextBox.Text = "9";
-            }
-            else { resultTextBox.Text += "9"; }
-        }
+        private void eightBtn_Click(object sender, RoutedEventArgs e) => NumberButtonClick(sender, e);
 
-        private void zeroBtn_Click(object sender, RoutedEventArgs e)
-        {
-            if (resultTextBox.Text == "0" && resultTextBox != null)
-            {
-                resultTextBox.Text = "0";
-            }
-            else { resultTextBox.Text += "0"; }
-        }
+        private void nineBtn_Click(object sender, RoutedEventArgs e) => NumberButtonClick(sender, e);
 
-        private void dotBtn_Click(object sender, RoutedEventArgs e)
-        {
-            if (resultTextBox.Text == "0" && resultTextBox != null)
-            {
-                resultTextBox.Text += ",";
-            }
-            else { resultTextBox.Text += ","; }
-        }
+        private void zeroBtn_Click(object sender, RoutedEventArgs e) => NumberButtonClick(sender, e);
+
+        private void dotBtn_Click(object sender, RoutedEventArgs e) => NumberButtonClick(sender, e);
 
         private void ceBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -174,48 +80,150 @@ namespace Lab_07_Calculator
 
         private void deleteBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (resultTextBox.Text != "0" && resultTextBox.Text != "")
+            if (!string.IsNullOrEmpty(resultTextBox.Text))
             {
-                resultTextBox.Text = resultTextBox.Text.Remove(resultTextBox.Text.Length - 1);
+                resultTextBox.Text = resultTextBox.Text.Substring(0, resultTextBox.Text.Length - 1);
             }
         }
 
-        private void plusBtn_Click(object sender, RoutedEventArgs e)
+        private bool TryParseDouble(string input, out double result)
         {
-            a = double.Parse(resultTextBox.Text);
-            resultTextBox.Clear();
-            count = 1;
-            calculationsTextBox.Text += a.ToString() + "+";
+            return double.TryParse(input, out result);
         }
 
-        private void minusBtn_Click(object sender, RoutedEventArgs e)
+        private void OperatorButtonClick(Func<double, double, double> operation, string symbol)
         {
-            a = double.Parse(resultTextBox.Text);
-            resultTextBox.Clear();
-            count = 2;
-            calculationsTextBox.Text += a.ToString() + "-";
+            if (TryParseDouble(resultTextBox.Text, out double parsedValue))
+            {
+                a = parsedValue;
+                resultTextBox.Clear();
+                calculationsTextBox.Text += a.ToString() + symbol;
+
+                // Ustawienie odpowiedniej operacji w MathOperations
+                mathOperations.SetOperation(operation);
+            }
+            else
+            {
+                resultTextBox.Text = "Error";
+            }
         }
 
-        private void multiplyBtn_Click(object sender, RoutedEventArgs e)
-        {
-            a = double.Parse(resultTextBox.Text);
-            resultTextBox.Clear();
-            count = 3;
-            calculationsTextBox.Text += a.ToString() + "*";
-        }
-
-        private void divideBtn_Click(object sender, RoutedEventArgs e)
-        {
-            a = double.Parse(resultTextBox.Text);
-            resultTextBox.Clear();
-            count = 4;
-            calculationsTextBox.Text += a.ToString() + "/";
-        }
+        private void plusBtn_Click(object sender, RoutedEventArgs e) => OperatorButtonClick(mathOperations.Plus, "+");
+        private void minusBtn_Click(object sender, RoutedEventArgs e) => OperatorButtonClick(mathOperations.Minus, "-");
+        private void multiplyBtn_Click(object sender, RoutedEventArgs e) => OperatorButtonClick(mathOperations.Multiply, "*");
+        private void divideBtn_Click(object sender, RoutedEventArgs e) => OperatorButtonClick(mathOperations.Divide, "/");
 
         private void equalBtn_Click(object sender, RoutedEventArgs e)
         {
-            Calculate();
-            calculationsTextBox.Text = "";
+            MathOperations mathOperations = MathOperations.Instance;
+
+            if (TryParseDouble(resultTextBox.Text, out double parsedValue))
+            {
+                b = parsedValue;
+                resultTextBox.Text = mathOperations.PerformOperation(a, b).ToString();
+                calculationsTextBox.Text = "";
+            }
+            else
+            {
+                resultTextBox.Text = "Error";
+            }
+        }
+
+        private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.D0:
+                case Key.NumPad0:
+                    AppendCharacter("0");
+                    break;
+
+                case Key.D1:
+                case Key.NumPad1:
+                    AppendCharacter("1");
+                    break;
+
+                case Key.D2:
+                case Key.NumPad2:
+                    AppendCharacter("2");
+                    break;
+
+                case Key.D3:
+                case Key.NumPad3:
+                    AppendCharacter("3");
+                    break;
+
+                case Key.D4:
+                case Key.NumPad4:
+                    AppendCharacter("4");
+                    break;
+
+                case Key.D5:
+                case Key.NumPad5:
+                    AppendCharacter("5");
+                    break;
+
+                case Key.D6:
+                case Key.NumPad6:
+                    AppendCharacter("6");
+                    break;
+
+                case Key.D7:
+                case Key.NumPad7:
+                    AppendCharacter("7");
+                    break;
+
+                case Key.D8:
+                case Key.NumPad8:
+                    AppendCharacter("8");
+                    break;
+
+                case Key.D9:
+                case Key.NumPad9:
+                    AppendCharacter("9");
+                    break;
+
+                case Key.OemPeriod:
+                case Key.Decimal:
+                    AppendCharacter(",");
+                    break;
+
+                case Key.Add:
+                    OperatorButtonClick(MathOperations.Instance.Plus, "+");
+                    break;
+
+                case Key.Subtract:
+                    OperatorButtonClick(MathOperations.Instance.Minus, "-");
+                    break;
+
+                case Key.Multiply:
+                    OperatorButtonClick(MathOperations.Instance.Multiply, "*");
+                    break;
+
+                case Key.Divide:
+                    OperatorButtonClick(MathOperations.Instance.Divide, "/");
+                    break;
+
+                case Key.Enter:
+                    equalBtn_Click(sender, e);
+                    break;
+
+                case Key.Back:
+                    deleteBtn_Click(sender, e);
+                    break;
+            }
+        }
+
+        private void AppendCharacter(string character)
+        {
+            if (resultTextBox.Text == "0" && resultTextBox != null)
+            {
+                resultTextBox.Text = character;
+            }
+            else
+            {
+                resultTextBox.Text += character;
+            }
         }
     }
 }
