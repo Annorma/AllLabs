@@ -20,6 +20,7 @@ namespace Lab_07.BLL
             }
         }
 
+        // Delegat do przechowywania referencji do funkcji matematycznych
         private Func<double, double, double> operation;
 
         public double PerformOperation(double a, double b)
@@ -38,7 +39,7 @@ namespace Lab_07.BLL
             }
             else
             {
-                throw new ArgumentException("Cannot divide by zero.");
+                return -1;
             }
         }
 

@@ -24,8 +24,7 @@ namespace Lab_07_Calculator
             this.PreviewKeyDown += Window_PreviewKeyDown;
         }
 
-        MathOperations mathOperations = MathOperations.Instance;
-        
+        private MathOperations mathOperations = MathOperations.Instance;
         private double a = 0;
         private double b = 0;
 
@@ -43,28 +42,6 @@ namespace Lab_07_Calculator
                 resultTextBox.Text += buttonText;
             }
         }
-
-        private void oneBtn_Click(object sender, RoutedEventArgs e) => NumberButtonClick(sender, e);
-
-        private void twoBtn_Click(object sender, RoutedEventArgs e) => NumberButtonClick(sender, e);
-
-        private void threeBtn_Click(object sender, RoutedEventArgs e) => NumberButtonClick(sender, e);
-
-        private void fourBtn_Click(object sender, RoutedEventArgs e) => NumberButtonClick(sender, e);
-
-        private void fiveBtn_Click(object sender, RoutedEventArgs e) => NumberButtonClick(sender, e);
-
-        private void sixBtn_Click(object sender, RoutedEventArgs e) => NumberButtonClick(sender, e);
-
-        private void sevenBtn_Click(object sender, RoutedEventArgs e) => NumberButtonClick(sender, e);
-
-        private void eightBtn_Click(object sender, RoutedEventArgs e) => NumberButtonClick(sender, e);
-
-        private void nineBtn_Click(object sender, RoutedEventArgs e) => NumberButtonClick(sender, e);
-
-        private void zeroBtn_Click(object sender, RoutedEventArgs e) => NumberButtonClick(sender, e);
-
-        private void dotBtn_Click(object sender, RoutedEventArgs e) => NumberButtonClick(sender, e);
 
         private void ceBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -115,8 +92,6 @@ namespace Lab_07_Calculator
 
         private void equalBtn_Click(object sender, RoutedEventArgs e)
         {
-            MathOperations mathOperations = MathOperations.Instance;
-
             if (TryParseDouble(resultTextBox.Text, out double parsedValue))
             {
                 b = parsedValue;
@@ -129,6 +104,7 @@ namespace Lab_07_Calculator
             }
         }
 
+        //Umożliwia wpisywanie liczb i znaków z klawiatury
         private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             switch (e.Key)

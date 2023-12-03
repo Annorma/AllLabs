@@ -29,23 +29,23 @@
         <Button x:Name="deleteBtn" Grid.Row="2" Grid.Column="2" Margin="1,1,1,1" FontSize="25" FontWeight="Normal" Click="deleteBtn_Click">&lt;</Button>
         <Button x:Name="divideBtn" Grid.Row="2" Grid.Column="3" Margin="1,1,1,1" FontSize="25" FontWeight="Normal" Click="divideBtn_Click">/</Button>
 
-        <Button x:Name="sevenBtn" Grid.Row="3" Margin="1,1,1,1" FontSize="25" Click="sevenBtn_Click">7</Button>
-        <Button x:Name="eightBtn" Grid.Row="3" Grid.Column="1" Margin="1,1,1,1" FontSize="25" Click="eightBtn_Click">8</Button>
-        <Button x:Name="nineBtn" Grid.Row="3" Grid.Column="2" Margin="1,1,1,1" FontSize="25" Click="nineBtn_Click">9</Button>
+        <Button x:Name="sevenBtn" Grid.Row="3" Margin="1,1,1,1" FontSize="25" Click="NumberButtonClick">7</Button>
+        <Button x:Name="eightBtn" Grid.Row="3" Grid.Column="1" Margin="1,1,1,1" FontSize="25" Click="NumberButtonClick">8</Button>
+        <Button x:Name="nineBtn" Grid.Row="3" Grid.Column="2" Margin="1,1,1,1" FontSize="25" Click="NumberButtonClick">9</Button>
         <Button x:Name="multiplyBtn" Grid.Row="3" Grid.Column="3" Margin="1,1,1,1" FontSize="25" Click="multiplyBtn_Click">*</Button>
 
-        <Button x:Name="fourBtn" Grid.Row="4" Margin="1,1,1,1" FontSize="25" Click="fourBtn_Click">4</Button>
-        <Button x:Name="fiveBtn" Grid.Row="4" Grid.Column="1" Margin="1,1,1,1" FontSize="25" Click="fiveBtn_Click">5</Button>
-        <Button x:Name="sixBtn" Grid.Row="4" Grid.Column="2" Margin="1,1,1,1" FontSize="25" Click="sixBtn_Click">6</Button>
+        <Button x:Name="fourBtn" Grid.Row="4" Margin="1,1,1,1" FontSize="25" Click="NumberButtonClick">4</Button>
+        <Button x:Name="fiveBtn" Grid.Row="4" Grid.Column="1" Margin="1,1,1,1" FontSize="25" Click="NumberButtonClick">5</Button>
+        <Button x:Name="sixBtn" Grid.Row="4" Grid.Column="2" Margin="1,1,1,1" FontSize="25" Click="NumberButtonClick">6</Button>
         <Button x:Name="minusBtn" Grid.Row="4" Grid.Column="3" Margin="1,1,1,1" FontSize="25" Click="minusBtn_Click">-</Button>
 
-        <Button x:Name="oneBtn" Grid.Row="5" Margin="1,1,1,1" FontSize="25" Click="oneBtn_Click">1</Button>
-        <Button x:Name="twoBtn" Grid.Row="5" Grid.Column="1" Margin="1,1,1,1" FontSize="25" Click="twoBtn_Click">2</Button>
-        <Button x:Name="threeBtn" Grid.Row="5" Grid.Column="2" Margin="1,1,1,1" FontSize="25" Click="threeBtn_Click">3</Button>
+        <Button x:Name="oneBtn" Grid.Row="5" Margin="1,1,1,1" FontSize="25" Click="NumberButtonClick">1</Button>
+        <Button x:Name="twoBtn" Grid.Row="5" Grid.Column="1" Margin="1,1,1,1" FontSize="25" Click="NumberButtonClick">2</Button>
+        <Button x:Name="threeBtn" Grid.Row="5" Grid.Column="2" Margin="1,1,1,1" FontSize="25" Click="NumberButtonClick">3</Button>
         <Button x:Name="plusBtn" Grid.Row="5" Grid.Column="3" Margin="1,1,1,1" FontSize="25" Click="plusBtn_Click">+</Button>
 
-        <Button x:Name="dotBtn" Grid.Row="6" Margin="1,1,1,1" FontSize="25" Click="dotBtn_Click">,</Button>
-        <Button x:Name="zeroBtn" Grid.Row="6" Grid.Column="1" Margin="1,1,1,1" FontSize="25" Click="zeroBtn_Click">0</Button>
+        <Button x:Name="dotBtn" Grid.Row="6" Margin="1,1,1,1" FontSize="25" Click="NumberButtonClick">,</Button>
+        <Button x:Name="zeroBtn" Grid.Row="6" Grid.Column="1" Margin="1,1,1,1" FontSize="25" Click="NumberButtonClick">0</Button>
         <Button x:Name="equalBtn" Grid.Row="6" Grid.Column="2" Margin="1,1,1,1" Grid.ColumnSpan="2" FontSize="25" Click="equalBtn_Click">=</Button>
     </Grid>
 </Window>
