@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab_07_Calculator"
         mc:Ignorable="d"
-        Title="Calculator" Height="480" Width="350">
-    
+        Title="Calculator" Height="480" Width="390" Background="#202020">
+
     <Window.Resources>
         <Style TargetType="Button" x:Key="BStyle">
             <Style.Resources>
@@ -14,9 +14,26 @@
                     <Setter Property="CornerRadius" Value="5"/>
                 </Style>
             </Style.Resources>
-            <Setter Property="Margin" Value="1"/>
+            <Setter Property="Margin" Value="1.5"/>
+            <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="FontSize" Value="25"/>
             <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="Background" Value="#323232"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#3B3B3B"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
     </Window.Resources>
     
@@ -35,33 +52,41 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBox x:Name="calculationsTextBox" Margin="2,0,2,0" Grid.ColumnSpan="4" TextAlignment="Right"/>
-        <TextBox x:Name="resultTextBox" Grid.ColumnSpan="4" Grid.Row="1" Margin="2,2,2,2" FontSize="45" TextAlignment="Right">0</TextBox>
+        <TextBox x:Name="calculationsTextBox" Margin="2,0,2,0" Grid.ColumnSpan="5" TextAlignment="Right" IsReadOnly="True" Background="#202020" Foreground="White" BorderThickness="0"/>
+        <TextBox x:Name="resultTextBox" Grid.ColumnSpan="5" Grid.Row="1" Margin="2,2,2,2" FontSize="45" TextAlignment="Right" IsReadOnly="True" Background="#202020" Foreground="White" BorderThickness="2">0</TextBox>
         
         <Button x:Name="ceBtn" Grid.Row="2" Style="{DynamicResource BStyle}" Click="ceBtn_Click">CE</Button>
         <Button x:Name="cBtn" Grid.Row="2" Grid.Column="1" Style="{DynamicResource BStyle}" Click="cBtn_Click">C</Button>
         <Button x:Name="deleteBtn" Grid.Row="2" Grid.Column="2" Style="{DynamicResource BStyle}" Click="deleteBtn_Click">&lt;</Button>
         <Button x:Name="divideBtn" Grid.Row="2" Grid.Column="3" Style="{DynamicResource BStyle}" Click="divideBtn_Click">/</Button>
+        <Button x:Name="factorialBtn" Grid.Row="2" Grid.Column="4" Style="{StaticResource BStyle}" Click="factorialBtn_Click">!</Button>
 
         <Button x:Name="sevenBtn" Grid.Row="3" Style="{DynamicResource BStyle}" Click="NumberButtonClick">7</Button>
         <Button x:Name="eightBtn" Grid.Row="3" Grid.Column="1" Style="{DynamicResource BStyle}" Click="NumberButtonClick">8</Button>
         <Button x:Name="nineBtn" Grid.Row="3" Grid.Column="2" Style="{DynamicResource BStyle}" Click="NumberButtonClick">9</Button>
         <Button x:Name="multiplyBtn" Grid.Row="3" Grid.Column="3" Style="{DynamicResource BStyle}" Click="multiplyBtn_Click">*</Button>
+        <Button x:Name="absoluteBtn" Grid.Row="3" Grid.Column="4" Style="{StaticResource BStyle}" Click="absoluteBtn_Click">|x|</Button>
 
         <Button x:Name="fourBtn" Grid.Row="4" Style="{DynamicResource BStyle}" Click="NumberButtonClick">4</Button>
         <Button x:Name="fiveBtn" Grid.Row="4" Grid.Column="1" Style="{DynamicResource BStyle}" Click="NumberButtonClick">5</Button>
         <Button x:Name="sixBtn" Grid.Row="4" Grid.Column="2" Style="{DynamicResource BStyle}" Click="NumberButtonClick">6</Button>
         <Button x:Name="minusBtn" Grid.Row="4" Grid.Column="3" Style="{DynamicResource BStyle}" Click="minusBtn_Click">-</Button>
+        <Button x:Name="squareRootBtn" Grid.Row="4" Grid.Column="4" Style="{StaticResource BStyle}" Click="squareRootBtn_Click">√</Button>
 
         <Button x:Name="oneBtn" Grid.Row="5" Style="{DynamicResource BStyle}" Click="NumberButtonClick">1</Button>
         <Button x:Name="twoBtn" Grid.Row="5" Grid.Column="1" Style="{DynamicResource BStyle}" Click="NumberButtonClick">2</Button>
         <Button x:Name="threeBtn" Grid.Row="5" Grid.Column="2" Style="{DynamicResource BStyle}" Click="NumberButtonClick">3</Button>
         <Button x:Name="plusBtn" Grid.Row="5" Grid.Column="3" Style="{DynamicResource BStyle}" Click="plusBtn_Click">+</Button>
+        <Button x:Name="powerBtn" Grid.Row="5" Grid.Column="4" Style="{StaticResource BStyle}" Click="powerBtn_Click">^</Button>
 
-        <Button x:Name="dotBtn" Grid.Row="6" Style="{DynamicResource BStyle}" Click="NumberButtonClick">,</Button>
+        <Button x:Name="changeSignBtn" Grid.Row="6" Grid.Column="0" Style="{StaticResource BStyle}" Click="changeSignBtn_Click">+/-</Button>
         <Button x:Name="zeroBtn" Grid.Row="6" Grid.Column="1" Style="{DynamicResource BStyle}" Click="NumberButtonClick">0</Button>
-        <Button x:Name="equalBtn" Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2" Style="{DynamicResource BStyle}" Click="equalBtn_Click">=</Button>
+        <Button x:Name="dotBtn" Grid.Row="6" Grid.Column="2" Style="{DynamicResource BStyle}" Click="NumberButtonClick">,</Button>
+        <Button x:Name="equalBtn" Grid.Row="6" Grid.Column="3" Style="{DynamicResource BStyle}" Background="#A39E9A" Foreground="Black" Click="equalBtn_Click">=</Button>
+        <Button x:Name="percentageBtn" Grid.Row="6" Grid.Column="4" Style="{StaticResource BStyle}" Click="percentageBtn_Click">%</Button>
+
     </Grid>
 </Window>

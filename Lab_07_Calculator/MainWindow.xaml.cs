@@ -105,6 +105,86 @@ namespace Lab_07_Calculator
             }
         }
 
+        private void factorialBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (TryParseDouble(resultTextBox.Text, out double parsedValue))
+            {
+                resultTextBox.Text = MathOperations.Instance.Factorial(parsedValue).ToString();
+            }
+            else
+            {
+                resultTextBox.Text = "Error";
+            }
+        }
+
+        private void absoluteBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (TryParseDouble(resultTextBox.Text, out double parsedValue))
+            {
+                resultTextBox.Text = MathOperations.Instance.Absolute(parsedValue).ToString();
+            }
+            else
+            {
+                resultTextBox.Text = "Error";
+            }
+        }
+
+        private void squareRootBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (TryParseDouble(resultTextBox.Text, out double parsedValue))
+            {
+                resultTextBox.Text = MathOperations.Instance.SquareRoot(parsedValue).ToString();
+            }
+            else
+            {
+                resultTextBox.Text = "Error";
+            }
+        }
+
+        private void powerBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (TryParseDouble(resultTextBox.Text, out double baseValue))
+            {
+                a = baseValue;
+                resultTextBox.Clear();
+                calculationsTextBox.Text = $"{a}^";
+                mathOperations.SetOperation(MathOperations.Instance.Power);
+            }
+            else
+            {
+                resultTextBox.Text = "Error";
+            }
+        }
+
+        private void percentageBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (TryParseDouble(resultTextBox.Text, out double baseValue))
+            {
+                a = baseValue;
+                resultTextBox.Clear();
+                calculationsTextBox.Text = $"{a}%";
+                mathOperations.SetOperation(MathOperations.Instance.Percentage);
+            }
+            else
+            {
+                resultTextBox.Text = "Error";
+            }
+        }
+
+        private void changeSignBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (TryParseDouble(resultTextBox.Text, out double value))
+            {
+                resultTextBox.Text = MathOperations.Instance.ChangeSign(value).ToString();
+            }
+            else
+            {
+                resultTextBox.Text = "Error";
+            }
+        }
+
+
+
         //Umożliwia wpisywanie liczb i znaków z klawiatury
         private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
         {
