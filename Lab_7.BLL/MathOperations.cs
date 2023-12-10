@@ -39,7 +39,7 @@ namespace Lab_07.BLL
             }
             else
             {
-                return -1;
+                throw new DivideByZeroException();
             }
         }
 

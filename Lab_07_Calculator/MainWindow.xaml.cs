@@ -97,6 +97,7 @@ namespace Lab_07_Calculator
                 b = parsedValue;
                 resultTextBox.Text = mathOperations.PerformOperation(a, b).ToString();
                 calculationsTextBox.Text = "";
+                a = 0;
             }
             else
             {
