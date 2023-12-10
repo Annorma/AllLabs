@@ -57,6 +57,7 @@ namespace Lab_08_Students
             StudentsDg.Columns.Add(new DataGridTextColumn() { Header = "Oceny", Binding = new Binding("Grades") { Converter = new GradesConverter() } });
             StudentsDg.AutoGenerateColumns = false;
             StudentsDg.ItemsSource = Students;
+            StudentsDg.IsReadOnly = true;
         }
 
         private void AddBtn_Click(object sender, RoutedEventArgs e)
