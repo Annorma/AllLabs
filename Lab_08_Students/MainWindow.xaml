@@ -21,9 +21,11 @@
     <DockPanel Background="LightGray">
         <DockPanel DockPanel.Dock="Top">
             <Menu DockPanel.Dock="Top">
+
                 <MenuItem Header="_Program">
                     <MenuItem x:Name="exitMi" Header="_Wyjście" Click="exitMi_Click"/>
                 </MenuItem>
+
                 <MenuItem Header="_Dane">
                     <MenuItem x:Name="SaveTxtMi" Header="_Zapisz do pliku TXT" Click="SaveTxtMi_Click"/>
                     <MenuItem x:Name="LoadTxtMi" Header="_Wczytaj z pliku TXT" Click="LoadTxtMi_Click"/>
