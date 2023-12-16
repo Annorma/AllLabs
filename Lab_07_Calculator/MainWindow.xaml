@@ -87,6 +87,5 @@
         <Button x:Name="dotBtn" Grid.Row="6" Grid.Column="2" Style="{DynamicResource BStyle}" Click="NumberButtonClick">,</Button>
         <Button x:Name="equalBtn" Grid.Row="6" Grid.Column="3" Style="{DynamicResource BStyle}" Background="#A39E9A" Foreground="Black" Click="equalBtn_Click">=</Button>
         <Button x:Name="percentageBtn" Grid.Row="6" Grid.Column="4" Style="{StaticResource BStyle}" Click="percentageBtn_Click">%</Button>
-
     </Grid>
 </Window>

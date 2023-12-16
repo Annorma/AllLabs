@@ -5,8 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab_08_Students"
         mc:Ignorable="d"
-        Title="Studenci" Height="450" Width="800">
+        Title="USOSWeb App" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="Menu">
+            <Setter Property="Background" Value="#323232"/>
+        </Style>
+
+        <Style TargetType="MenuItem">
+            <Setter Property="Background" Value="#323232"/>
+            <Setter Property="BorderBrush" Value="#323232"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+    </Window.Resources>
+    
     <DockPanel Background="LightGray">
+        <DockPanel DockPanel.Dock="Top">
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="_Program">
+                    <MenuItem x:Name="exitMi" Header="_Wyjście" Click="exitMi_Click"/>
+                </MenuItem>
+                <MenuItem Header="_Dane">
+                    <MenuItem x:Name="SaveTxtMi" Header="_Zapisz do pliku TXT" Click="SaveTxtMi_Click"/>
+                    <MenuItem x:Name="LoadTxtMi" Header="_Wczytaj z pliku TXT" Click="LoadTxtMi_Click"/>
+                    <MenuItem x:Name="SaveXmlMi" Header="_Zapisz do pliku XML" Click="SaveXmlMi_Click"/>
+                    <MenuItem x:Name="LoadXmlMi" Header="_Wszytaj z pliku XML" Click="LoadXmlMi_Click"/>
+                    <MenuItem x:Name="SaveJsonMi" Header="_Zapisz do pliku JSON" Click="SaveJsonMi_Click"/>
+                    <MenuItem x:Name="LoadJsonMi" Header="_Wszytaj z pliku JSON" Click="LoadJsonMi_Click"/>
+                </MenuItem>
+                <MenuItem Header="_Studenci">
+                    <MenuItem x:Name="AddMi" Header="_Dodaj" Click="AddMi_Click"/>
+                    <MenuItem x:Name="RemoveMi" Header="_Usuń" Click="RemoveMi_Click"/>
+                </MenuItem>
+            </Menu>
+        </DockPanel>
         <DockPanel DockPanel.Dock="Top" Background="DarkBlue">
             <Label Margin="20 0 0 0" FontSize="20" Foreground="White" BorderBrush="Transparent">USOSWeb</Label>
         </DockPanel>
@@ -14,17 +45,7 @@
             <Label Margin="20 0 0 0" FontSize="10" Foreground="White" BorderBrush="Transparent">Lista studentów</Label>
         </DockPanel>
         <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
-            <WrapPanel>
-                <Button x:Name="AddBtn" Padding="8"  Background="White" FontSize="15" Margin="5" Content="Dodaj studenta" Click="AddBtn_Click"/>
-                <Button x:Name="RemoveBtn" Padding="8"  Background="White" FontSize="15" Margin="5" Content="Usuń studenta" Click="RemoveBtn_Click"/>
-            </WrapPanel>
-            <DataGrid x:Name="StudentsDg" Grid.Row="1" Background="LightGray">
-
-            </DataGrid>
+            <DataGrid x:Name="StudentsDg" Background="LightGray"></DataGrid>
         </Grid>
     </DockPanel>
 </Window>

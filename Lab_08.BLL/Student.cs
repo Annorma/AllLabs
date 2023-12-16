@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace Lab_08.BLL
 {
@@ -8,8 +9,9 @@ namespace Lab_08.BLL
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Faculty { get; set; }
+
         public int StudentNo { get; set; }
-        public IList<Grade> Grades { get; set; } = new List<Grade>();
+        public List<Grade> Grades { get; set; } = new List<Grade>();
 
         public Student()
         {
@@ -19,7 +21,7 @@ namespace Lab_08.BLL
             StudentNo = 0;
         }
 
-        public Student(string firstName, string lastName, string faculty, int studentNo, IList<Grade> grades)
+        public Student(string firstName, string lastName, string faculty, int studentNo, List<Grade> grades)
         {
             FirstName = firstName;
             LastName = lastName;
