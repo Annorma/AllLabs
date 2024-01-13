@@ -10,4 +10,8 @@
     <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Lab_10.Model\Lab_10.Model.csproj" />
+  </ItemGroup>
+
 </Project>

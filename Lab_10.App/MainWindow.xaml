@@ -5,8 +5,41 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab_10.App"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="USOSWeb App" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="Menu">
+            <Setter Property="Background" Value="#323232"/>
+        </Style>
 
-    </Grid>
+        <Style TargetType="MenuItem">
+            <Setter Property="Background" Value="#323232"/>
+            <Setter Property="BorderBrush" Value="#323232"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+    </Window.Resources>
+
+    <DockPanel Background="LightGray">
+        <DockPanel DockPanel.Dock="Top">
+            <Menu DockPanel.Dock="Top">
+
+                <MenuItem Header="_Program">
+                    <MenuItem x:Name="exitMi" Header="_Wyjście" Click="exitMi_Click"/>
+                </MenuItem>
+
+                <MenuItem Header="_Studenci">
+                    <MenuItem x:Name="AddMi" Header="_Dodaj" Click="AddMi_Click"/>
+                    <MenuItem x:Name="RemoveMi" Header="_Usuń" Click="RemoveMi_Click"/>
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        <DockPanel DockPanel.Dock="Top" Background="DarkBlue">
+            <Label Margin="20 0 0 0" FontSize="20" Foreground="White" BorderBrush="Transparent">USOSWeb</Label>
+        </DockPanel>
+        <DockPanel DockPanel.Dock="Top" Background="DodgerBlue">
+            <Label Margin="20 0 0 0" FontSize="10" Foreground="White" BorderBrush="Transparent">Lista studentów</Label>
+        </DockPanel>
+        <Grid>
+            <DataGrid x:Name="StudentsDg" Background="LightGray"></DataGrid>
+        </Grid>
+    </DockPanel>
 </Window>

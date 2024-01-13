@@ -1,3 +1,4 @@
+using Lab_10.Model.Attributes;
 using System;
 using System.Collections.Generic;
 
@@ -15,13 +16,10 @@ namespace Lab_10.Model
         public string FirstName { get; set; }
         [DbCol]
         [DisplayGrid]
-        public string Lastame { get; set; }
+        public string LastName { get; set; }
         [DbCol]
         [DisplayGrid]
         public string Faculty { get; set; }
-        [DbCol]
-        [DisplayGrid]
-        public DateTime DateOfBirth { get; set; }
         public List<Grade> Grades { get; set; }
         [DisplayGrid("Grades")]
         public string JoinedGrades => string.Join(", ", Grades);

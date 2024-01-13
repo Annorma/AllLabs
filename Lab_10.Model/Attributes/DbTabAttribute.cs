@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Lab_10.Model.Attributes
 {
-    internal class DbTabAttribute
+    [AttributeUsage(AttributeTargets.Class)]
+    public class DbTabAttribute : Attribute
     {
+        public string Name { get; set; }
     }
 }

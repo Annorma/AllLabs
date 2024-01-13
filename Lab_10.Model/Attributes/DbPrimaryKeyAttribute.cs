@@ -10,5 +10,4 @@ namespace Lab_10.Model.Attributes
     public class DbPrimaryKeyAttribute : Attribute
     {
     }
-
 }

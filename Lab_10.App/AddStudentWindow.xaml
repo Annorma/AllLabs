@@ -1,0 +1,47 @@
+﻿<Window x:Class="Lab_10.App.AddStudentWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lab_10.App"
+        mc:Ignorable="d"
+        Title="Dodaj studenta" Height="450" Width="330" ResizeMode="NoResize">
+    <DockPanel Background="LightGray">
+        <DockPanel DockPanel.Dock="Top" Background="DarkBlue">
+            <Label Margin="20 0 0 0" FontSize="20" Foreground="White" BorderBrush="Transparent">USOSWeb</Label>
+        </DockPanel>
+        <DockPanel DockPanel.Dock="Top" Background="DodgerBlue">
+            <Label Margin="20 0 0 0" FontSize="10" Foreground="White" BorderBrush="Transparent">Dodawanie studentów</Label>
+        </DockPanel>
+        <Grid VerticalAlignment="Center" DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Label Target="{Binding ElementName=FirstNameTb}">_Imię:</Label>
+            <TextBox x:Name="FirstNameTb" Margin="0 1 1 0" Grid.Column="1"/>
+
+            <Label Grid.Row="1" Target="{Binding ElementName=LastNameTb}">_Nazwisko:</Label>
+            <TextBox x:Name="LastNameTb" Margin="0 1 1 0" Grid.Row="1" Grid.Column="1"/>
+
+            <Label Grid.Row="2" Target="{Binding ElementName=FacultyTb}">_Wydział:</Label>
+            <TextBox x:Name="FacultyTb" Margin="0 1 1 0" Grid.Row="2" Grid.Column="1"/>
+
+            <Label Grid.Row="3" Target="{Binding ElementName=StudentNoTb}">Nr _albumu:</Label>
+            <TextBox x:Name="StudentNoTb" Margin="0 1 1 0" Grid.Row="3" Grid.Column="1"/>
+
+            <Label Grid.Row="4" Target="{Binding ElementName=GradesTb}">_Oceny:</Label>
+            <TextBox x:Name="GradesTb" Margin="0 1 1 0" Grid.Row="4" Grid.Column="1"/>
+        </Grid>
+        <DockPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
+            <Button x:Name="AddBtn" Background="White" FontSize="15" Margin="10" Height="45" Click="AddBtn_Click">Dodaj</Button>
+        </DockPanel>
+    </DockPanel>
+</Window>

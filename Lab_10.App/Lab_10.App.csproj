@@ -7,4 +7,9 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Lab_10.Model\Lab_10.Model.csproj" />
+    <ProjectReference Include="..\Lab_11.BLL\Lab_11.BLL.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lab_10.Model.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -13,8 +14,6 @@ namespace Lab_10.Model
         [DbCol]
         [DbPrimaryKey]
         public int Id { get; set; }
-        [DbCol]
-        public DateTime Date { get; set; }
         [DbCol]
         public string Subject { get; set; }
         [DbCol]
