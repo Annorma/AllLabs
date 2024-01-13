@@ -9,7 +9,7 @@ namespace Lab_11.BLL
 {
     public class Grade
     {
-        public string Subject { get; set; }
+        public string Subject { get; set; } // test
         public double Value { get; set; }
 
         public Grade()
