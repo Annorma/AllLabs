@@ -28,12 +28,22 @@ namespace Lab_10.App
 
             if (student != null)
             {
-                Student = student;
-                FirstNameTb.Text = student.FirstName;
-                LastNameTb.Text = student.LastName;
-                FacultyTb.Text = student.Faculty;
-                StudentNoTb.Text = student.StudentNo.ToString();
-                GradesTb.Text = student.Grades.ToString();
+                Student = new Student
+                {
+                    FirstName = student.FirstName,
+                    LastName = student.LastName,
+                    Faculty = student.Faculty,
+                    StudentNo = student.StudentNo,
+                    Grades = new List<Grade>(student.Grades),
+                    DateOfBirth = student.DateOfBirth
+                };
+
+                FirstNameTb.Text = Student.FirstName;
+                LastNameTb.Text = Student.LastName;
+                FacultyTb.Text = Student.Faculty;
+                StudentNoTb.Text = Student.StudentNo.ToString();
+                GradesTb.Text = string.Join(", ", student.Grades.Select(g => $"{g.Subject}: {g.Value}"));
+                DatePck.SelectedDate = Student.DateOfBirth;
             }
             else
             {
@@ -51,19 +61,22 @@ namespace Lab_10.App
                  !Regex.IsMatch(LastNameTb.Text, @"^\p{Lu}\p{Ll}{1,20}$") ||
                  !Regex.IsMatch(StudentNoTb.Text, @"^[0-9]{4,10}$") ||
                  !Regex.IsMatch(FacultyTb.Text, @"^[\p{Lu}|\p{Ll}]{1,12}$") ||
-                 !Regex.IsMatch(GradesTb.Text, @"^[A-Za-z]+\s*:\s*\d+(\.\d+)?(?:\s*,\s*[A-Za-z]+\s*:\s*\d+(\.\d+)?)*$")
+                 !Regex.IsMatch(GradesTb.Text, @"^[A-Za-z]+\s*:\s*\d+(\.\d+)?(?:\s*,\s*[A-Za-z]+\s*:\s*\d+(\.\d+)?)*$") ||
+                 DatePck.SelectedDate > DateTime.Now
                  )
-            {
-                MessageBox.Show("Wprowadzone dane są niepoprawne.");
-                return;
-            };
+                {
+                    MessageBox.Show("Wprowadzone dane są niepoprawne.");
+                    return;
+                };
             Student.FirstName = FirstNameTb.Text;
             Student.LastName = LastNameTb.Text;
             Student.StudentNo = int.Parse(StudentNoTb.Text);
             Student.Faculty = FacultyTb.Text;
+            Student.DateOfBirth = DatePck.SelectedDate.Value;
+            Student.Grades = ParseGrades(GradesTb.Text);
 
-            List<Grade> grades = ParseGrades(GradesTb.Text);
-            Student.Grades = grades;
+            //List<Grade> grades = ParseGrades(GradesTb.Text);
+            //Student.Grades = grades;
             DialogResult = true;
         }
 

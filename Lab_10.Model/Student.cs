@@ -20,6 +20,9 @@ namespace Lab_10.Model
         [DbCol]
         [DisplayGrid]
         public string Faculty { get; set; }
+        [DbCol]
+        [DisplayGrid]
+        public DateTime DateOfBirth { get; set; }
         public List<Grade> Grades { get; set; }
         [DisplayGrid("Grades")]
         public string JoinedGrades => string.Join(", ", Grades);

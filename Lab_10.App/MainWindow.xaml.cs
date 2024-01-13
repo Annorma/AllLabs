@@ -26,21 +26,21 @@ namespace Lab_10.App
     public partial class MainWindow : Window
     {
         #region Comments
-        //public IList<Student> Students { get; set; }
+        public IList<Student> Students { get; set; }
 
-        //public class GradesConverter : IValueConverter
-        //{
-        //    public object? Convert(object value, Type targetType, object parametr, CultureInfo culture)
-        //    {
-        //        if (value is not List<Grade> grades) return null;
-        //        return string.Join(", ", grades.Select(g => $"{g.Subject}: {g.Value}"));
-        //    }
+        public class GradesConverter : IValueConverter
+        {
+            public object? Convert(object value, Type targetType, object parametr, CultureInfo culture)
+            {
+                if (value is not List<Grade> grades) return null;
+                return string.Join(", ", grades.Select(g => $"{g.Subject}: {g.Value}"));
+            }
 
-        //    public object? ConvertBack(object value, Type targetType, object parametr, CultureInfo culture)
-        //    {
-        //        throw new NotImplementedException();
-        //    }
-        //}
+            public object? ConvertBack(object value, Type targetType, object parametr, CultureInfo culture)
+            {
+                throw new NotImplementedException();
+            }
+        }
         #endregion
 
         private readonly IRepository<Student> _studentRepository;
@@ -88,8 +88,7 @@ namespace Lab_10.App
         {
             var studentList = _studentRepository.Select();
             foreach (var student in studentList)
-                student.Grades = _gradeRepository.Select(
-                new Tuple<string, string, object, string>("StudentNo", "=", student.StudentNo, null));
+                student.Grades = _gradeRepository.Select(new Tuple<string, string, object, string>("StudentNo", "=", student.StudentNo, null));
             SetGrid(studentList);
         }
 
@@ -107,6 +106,7 @@ namespace Lab_10.App
                     { Header = col.Title ?? prop.Name, Binding = new Binding(prop.Name) });
             }
             StudentsDg.ItemsSource = list;
+            StudentsDg.AutoGenerateColumns = false;
             StudentsDg.Items.Refresh();
         }
 
@@ -119,8 +119,27 @@ namespace Lab_10.App
                 addStudentWindow = new AddStudentWindow(student);
             else
                 addStudentWindow = new AddStudentWindow();
+            //if (addStudentWindow.ShowDialog() == true)
+            //    RefreshGrid();
+
             if (addStudentWindow.ShowDialog() == true)
+            {
+                Student updatedStudent = addStudentWindow.Student;
+
+                if (StudentsDg.SelectedItem != null)
+                {
+                    // Update existing student in the repository
+                    _studentRepository.Update(updatedStudent);
+                }
+                else
+                {
+                    // Add the new student to the repository
+                    _studentRepository.Insert(updatedStudent);
+                }
+
+                // Refresh the grid after updating or adding a student
                 RefreshGrid();
+            }
 
             //var dodajStudenta = new AddStudentWindow();
             //if (dodajStudenta.ShowDialog() == true)

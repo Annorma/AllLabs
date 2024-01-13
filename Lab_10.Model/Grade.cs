@@ -15,6 +15,8 @@ namespace Lab_10.Model
         [DbPrimaryKey]
         public int Id { get; set; }
         [DbCol]
+        public DateTime Date { get; set; }
+        [DbCol]
         public string Subject { get; set; }
         [DbCol]
         public double Value { get; set; }

@@ -24,6 +24,7 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
             <Label Target="{Binding ElementName=FirstNameTb}">_Imię:</Label>
             <TextBox x:Name="FirstNameTb" Margin="0 1 1 0" Grid.Column="1"/>
@@ -39,6 +40,9 @@
 
             <Label Grid.Row="4" Target="{Binding ElementName=GradesTb}">_Oceny:</Label>
             <TextBox x:Name="GradesTb" Margin="0 1 1 0" Grid.Row="4" Grid.Column="1"/>
+            
+            <Label Grid.Row="5">Data urodzenia: </Label>
+            <DatePicker x:Name="DatePck" Margin="0 1 1 0" Grid.Row="5" Grid.Column="1"/>
         </Grid>
         <DockPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
             <Button x:Name="AddBtn" Background="White" FontSize="15" Margin="10" Height="45" Click="AddBtn_Click">Dodaj</Button>
