@@ -1,0 +1,35 @@
+﻿<Window x:Class="Lab_10.App.AddGradeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lab_10.App"
+        mc:Ignorable="d"
+         Title="Dodaj ocenę" Height="250" Width="330" ResizeMode="NoResize">
+    <DockPanel Background="LightGray">
+        <DockPanel DockPanel.Dock="Top" Background="DarkBlue">
+            <Label Margin="20 0 0 0" FontSize="20" Foreground="White" BorderBrush="Transparent">USOSWeb</Label>
+        </DockPanel>
+        <DockPanel DockPanel.Dock="Top" Background="DodgerBlue">
+            <Label Margin="20 0 0 0" FontSize="10" Foreground="White" BorderBrush="Transparent">Dodawanie ocen</Label>
+        </DockPanel>
+        <Grid VerticalAlignment="Center" DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Label Target="{Binding ElementName=SubjectTb}">_Przedmiot:</Label>
+            <TextBox x:Name="SubjectTb" Margin="0 1 1 0" Grid.Column="1"/>
+
+            <Label Grid.Row="1" Target="{Binding ElementName=ValueTb}">_Wartość:</Label>
+            <TextBox x:Name="ValueTb" Margin="0 1 1 0" Grid.Row="1" Grid.Column="1"/>
+        </Grid>
+        <DockPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
+            <Button x:Name="AddBtn" Background="White" FontSize="15" Margin="10" Height="45" Click="AddBtn_Click">Dodaj</Button>
+        </DockPanel>
+    </DockPanel>
+</Window>

@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="USOSWeb App" Height="450" Width="800">
     <Window.Resources>
+
         <Style TargetType="Menu">
             <Setter Property="Background" Value="#323232"/>
         </Style>
@@ -16,6 +17,7 @@
             <Setter Property="BorderBrush" Value="#323232"/>
             <Setter Property="Foreground" Value="White"/>
         </Style>
+
     </Window.Resources>
 
     <DockPanel Background="LightGray">
@@ -27,8 +29,12 @@
                 </MenuItem>
 
                 <MenuItem Header="_Studenci">
-                    <MenuItem x:Name="AddMi" Header="_Dodaj" Click="AddMi_Click"/>
+                    <MenuItem x:Name="AddMi" Header="_Dodaj/Zmień" Click="AddMi_Click"/>
                     <MenuItem x:Name="RemoveMi" Header="_Usuń" Click="RemoveMi_Click"/>
+                </MenuItem>
+                
+                <MenuItem Header="_Oceny">
+                    <MenuItem x:Name="AddGradeMi" Header="_Dodaj" Click="AddGradeMi_Click"/>
                 </MenuItem>
             </Menu>
         </DockPanel>
@@ -39,7 +45,18 @@
             <Label Margin="20 0 0 0" FontSize="10" Foreground="White" BorderBrush="Transparent">Lista studentów</Label>
         </DockPanel>
         <Grid>
-            <DataGrid x:Name="StudentsDg" Background="LightGray"></DataGrid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            
+            <DatePicker x:Name="filterDatePck" Grid.Row="0"></DatePicker>
+            <Button x:Name="filterBtn" Grid.Column="1" Grid.Row="0" Width="100" Click="filterBtn_Click">Filtruj</Button>
+            <DataGrid x:Name="StudentsDg" Background="LightGray" Grid.Row="1" Grid.ColumnSpan="2"></DataGrid>
         </Grid>
     </DockPanel>
 </Window>

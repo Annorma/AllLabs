@@ -92,6 +92,7 @@ namespace Lab_10.DAL
                 {
                     cmd.Parameters.AddWithValue($"@{kvpCol.Key}", kvpCol.Value);
                 }
+
                 if (dbConnection.State == ConnectionState.Closed)
                 {
                     dbConnection.Open();

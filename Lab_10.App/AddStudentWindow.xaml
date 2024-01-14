@@ -11,7 +11,7 @@
             <Label Margin="20 0 0 0" FontSize="20" Foreground="White" BorderBrush="Transparent">USOSWeb</Label>
         </DockPanel>
         <DockPanel DockPanel.Dock="Top" Background="DodgerBlue">
-            <Label Margin="20 0 0 0" FontSize="10" Foreground="White" BorderBrush="Transparent">Dodawanie studentów</Label>
+            <Label Margin="20 0 0 0" FontSize="10" Foreground="White" BorderBrush="Transparent">Student</Label>
         </DockPanel>
         <Grid VerticalAlignment="Center" DockPanel.Dock="Top">
             <Grid.ColumnDefinitions>
@@ -23,7 +23,7 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
+                <!--<RowDefinition Height="1*"/>-->
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
             <Label Target="{Binding ElementName=FirstNameTb}">_Imię:</Label>
@@ -38,14 +38,14 @@
             <Label Grid.Row="3" Target="{Binding ElementName=StudentNoTb}">Nr _albumu:</Label>
             <TextBox x:Name="StudentNoTb" Margin="0 1 1 0" Grid.Row="3" Grid.Column="1"/>
 
-            <Label Grid.Row="4" Target="{Binding ElementName=GradesTb}">_Oceny:</Label>
-            <TextBox x:Name="GradesTb" Margin="0 1 1 0" Grid.Row="4" Grid.Column="1"/>
+            <!--<Label Grid.Row="4" Target="{Binding ElementName=GradesTb}">_Oceny:</Label>
+            <TextBox x:Name="GradesTb" Margin="0 1 1 0" Grid.Row="4" Grid.Column="1"/>-->
             
             <Label Grid.Row="5">Data urodzenia: </Label>
             <DatePicker x:Name="DatePck" Margin="0 1 1 0" Grid.Row="5" Grid.Column="1"/>
         </Grid>
         <DockPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
-            <Button x:Name="AddBtn" Background="White" FontSize="15" Margin="10" Height="45" Click="AddBtn_Click">Dodaj</Button>
+            <Button x:Name="AddBtn" Background="White" FontSize="15" Margin="10" Height="45" Click="AddBtn_Click">Zapisz</Button>
         </DockPanel>
     </DockPanel>
 </Window>

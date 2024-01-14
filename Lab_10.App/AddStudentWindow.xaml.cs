@@ -22,6 +22,8 @@ namespace Lab_10.App
     /// </summary>
     public partial class AddStudentWindow : Window
     {
+        public Student Student { get; set; }
+
         public AddStudentWindow(Student? student = null)
         {
             InitializeComponent();
@@ -42,7 +44,7 @@ namespace Lab_10.App
                 LastNameTb.Text = Student.LastName;
                 FacultyTb.Text = Student.Faculty;
                 StudentNoTb.Text = Student.StudentNo.ToString();
-                GradesTb.Text = string.Join(", ", student.Grades.Select(g => $"{g.Subject}: {g.Value}"));
+                //GradesTb.Text = string.Join(", ", student.Grades.Select(g => $"{g.Subject}: {g.Value}"));
                 DatePck.SelectedDate = Student.DateOfBirth;
             }
             else
@@ -52,7 +54,7 @@ namespace Lab_10.App
             };
 
         }
-        public Student Student { get; set; }
+
 
         private void AddBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -61,7 +63,7 @@ namespace Lab_10.App
                  !Regex.IsMatch(LastNameTb.Text, @"^\p{Lu}\p{Ll}{1,20}$") ||
                  !Regex.IsMatch(StudentNoTb.Text, @"^[0-9]{4,10}$") ||
                  !Regex.IsMatch(FacultyTb.Text, @"^[\p{Lu}|\p{Ll}]{1,12}$") ||
-                 !Regex.IsMatch(GradesTb.Text, @"^[A-Za-z]+\s*:\s*\d+(\.\d+)?(?:\s*,\s*[A-Za-z]+\s*:\s*\d+(\.\d+)?)*$") ||
+                 //!Regex.IsMatch(GradesTb.Text, @"^[A-Za-z]+\s*:\s*\d+(\.\d+)?(?:\s*,\s*[A-Za-z]+\s*:\s*\d+(\.\d+)?)*$") ||
                  DatePck.SelectedDate > DateTime.Now
                  )
                 {
@@ -73,8 +75,12 @@ namespace Lab_10.App
             Student.StudentNo = int.Parse(StudentNoTb.Text);
             Student.Faculty = FacultyTb.Text;
             Student.DateOfBirth = DatePck.SelectedDate.Value;
-            Student.Grades = ParseGrades(GradesTb.Text);
 
+            //Student.Grades.Clear();
+            //List<Grade> grades = ParseGrades(GradesTb.Text);
+            //Student.Grades.AddRange(grades);
+
+            //Student.Grades = ParseGrades(GradesTb.Text);
             //List<Grade> grades = ParseGrades(GradesTb.Text);
             //Student.Grades = grades;
             DialogResult = true;
