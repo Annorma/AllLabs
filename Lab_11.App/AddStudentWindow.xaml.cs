@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,8 +13,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Lab_11.BLL;
-
 
 namespace Lab_11.App
 {
@@ -21,18 +21,29 @@ namespace Lab_11.App
     /// </summary>
     public partial class AddStudentWindow : Window
     {
-        public AddStudentWindow(Student? student = null)
+        public Student Student { get; set; }
+
+        public AddStudentWindow(Student student = null)
         {
             InitializeComponent();
 
             if (student != null)
             {
-                Student = student;
-                FirstNameTb.Text = student.FirstName;
-                LastNameTb.Text = student.LastName;
-                FacultyTb.Text = student.Faculty;
-                StudentNoTb.Text = student.StudentNo.ToString();
-                GradesTb.Text = student.Grades.ToString();
+                Student = new Student
+                {
+                    FirstName = student.FirstName,
+                    LastName = student.LastName,
+                    Faculty = student.Faculty,
+                    StudentNo = student.StudentNo,
+                    Grades = new List<Grade>(student.Grades),
+                    DateOfBirth = student.DateOfBirth
+                };
+
+                FirstNameTb.Text = Student.FirstName;
+                LastNameTb.Text = Student.LastName;
+                FacultyTb.Text = Student.Faculty;
+                StudentNoTb.Text = Student.StudentNo.ToString();
+                DatePck.SelectedDate = Student.DateOfBirth;
             }
             else
             {
@@ -41,7 +52,7 @@ namespace Lab_11.App
             };
 
         }
-        public Student Student { get; set; }
+
 
         private void AddBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -50,7 +61,7 @@ namespace Lab_11.App
                  !Regex.IsMatch(LastNameTb.Text, @"^\p{Lu}\p{Ll}{1,20}$") ||
                  !Regex.IsMatch(StudentNoTb.Text, @"^[0-9]{4,10}$") ||
                  !Regex.IsMatch(FacultyTb.Text, @"^[\p{Lu}|\p{Ll}]{1,12}$") ||
-                 !Regex.IsMatch(GradesTb.Text, @"^[A-Za-z]+\s*:\s*\d+(\.\d+)?(?:\s*,\s*[A-Za-z]+\s*:\s*\d+(\.\d+)?)*$")
+                 DatePck.SelectedDate > DateTime.Now
                  )
             {
                 MessageBox.Show("Wprowadzone dane są niepoprawne.");
@@ -60,31 +71,15 @@ namespace Lab_11.App
             Student.LastName = LastNameTb.Text;
             Student.StudentNo = int.Parse(StudentNoTb.Text);
             Student.Faculty = FacultyTb.Text;
+            Student.DateOfBirth = DatePck.SelectedDate.Value;
 
-            List<Grade> grades = ParseGrades(GradesTb.Text);
-            Student.Grades = grades;
-            DialogResult = true;
-        }
-
-        private List<Grade> ParseGrades(string gradesText)
-        {
-            var grades = new List<Grade>();
-
-            var gradeStrings = gradesText.Split(", ");
-            foreach (var gradeString in gradeStrings)
+            using (StudentsDbContext dbContext = new StudentsDbContext())
             {
-                var parts = gradeString.Split(": ");
-                if (parts.Length == 2)
-                {
-                    var subject = parts[0];
-                    if (double.TryParse(parts[1], NumberStyles.Float, CultureInfo.InvariantCulture, out var gradeValue))
-                    {
-                        grades.Add(new Grade { Subject = subject, Value = gradeValue });
-                    }
-                }
+                dbContext.Students.Add(Student);
+                dbContext.SaveChanges();
             }
 
-            return grades;
+            DialogResult = true;
         }
     }
 }
