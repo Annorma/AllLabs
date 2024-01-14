@@ -29,7 +29,7 @@
                 </MenuItem>
 
                 <MenuItem Header="_Studenci">
-                    <MenuItem x:Name="AddMi" Header="_Dodaj/Zmień" Click="AddMi_Click"/>
+                    <MenuItem x:Name="AddMi" Header="_Dodaj" Click="AddMi_Click"/>
                     <MenuItem x:Name="RemoveMi" Header="_Usuń" Click="RemoveMi_Click"/>
                 </MenuItem>
 
