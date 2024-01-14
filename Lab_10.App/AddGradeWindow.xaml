@@ -11,7 +11,7 @@
             <Label Margin="20 0 0 0" FontSize="20" Foreground="White" BorderBrush="Transparent">USOSWeb</Label>
         </DockPanel>
         <DockPanel DockPanel.Dock="Top" Background="DodgerBlue">
-            <Label Margin="20 0 0 0" FontSize="10" Foreground="White" BorderBrush="Transparent">Dodawanie ocen</Label>
+            <Label Margin="20 0 0 0" FontSize="10" Foreground="White" BorderBrush="Transparent">Dodawanie oceny</Label>
         </DockPanel>
         <Grid VerticalAlignment="Center" DockPanel.Dock="Top">
             <Grid.ColumnDefinitions>

@@ -27,26 +27,6 @@ namespace Lab_10.App
     /// </summary>
     public partial class MainWindow : Window
     {
-        #region Comments
-        //public IList<Student> Students { get; set; }
-        //private readonly GradesConverter gradesConverter = new GradesConverter();
-
-        //public class GradesConverter : IValueConverter
-        //{
-        //    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        //    {
-        //        if (value is not List<Grade> grades) return null;
-
-        //        return string.Join("; ", grades.Select(g => $"{g.Subject}: {g.Value}"));
-        //    }
-
-        //    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        //    {
-        //        throw new NotImplementedException();
-        //    }
-        //}
-        #endregion
-
         private readonly IRepository<Student> _studentRepository;
         private readonly IRepository<Grade> _gradeRepository;
         private ICollectionView _collectionView;
@@ -59,35 +39,6 @@ namespace Lab_10.App
             InitializeComponent();
             RefreshGrid();
             _collectionView = CollectionViewSource.GetDefaultView(StudentsDg.ItemsSource);
-
-        #region Comments
-        //Students = new List<Student>
-        //{
-        //    new Student(){FirstName = "Jan", LastName="Kowalski", Faculty="WIMII", StudentNo = 116843, Grades = new List<Grade>(){
-        //        new Grade("PO",4.5),
-        //        new Grade("AM",3.5) }
-        //    },
-        //    new Student(){FirstName = "Michał", LastName="Nowak", Faculty="WIMII", StudentNo = 468735, Grades = new List<Grade>()
-        //    {
-        //        new Grade("PO",4.5),
-        //        new Grade("LM",5.0) }
-        //    },
-        //    new Student(){FirstName = "Marcin", LastName="Jakubski", Faculty="WIP", StudentNo = 647674, Grades = new List<Grade>()
-        //    {
-        //        new Grade("GH",2.0),
-        //        new Grade("WF",5.0) }
-        //    }
-        //};
-        //StudentsDg.Columns.Add(new DataGridTextColumn() { Header = "Imię", Binding = new Binding("FirstName") });
-        //StudentsDg.Columns.Add(new DataGridTextColumn() { Header = "Nazwisko", Binding = new Binding("LastName") });
-        //StudentsDg.Columns.Add(new DataGridTextColumn() { Header = "Wydział", Binding = new Binding("Faculty") });
-        //StudentsDg.Columns.Add(new DataGridTextColumn() { Header = "Nr albumu", Binding = new Binding("StudentNo") });
-        //StudentsDg.Columns.Add(new DataGridTextColumn() { Header = "Oceny", Binding = new Binding("Grades") { Converter = new GradesConverter() } });
-        //StudentsDg.AutoGenerateColumns = false;
-        //StudentsDg.ItemsSource = Students;
-        //StudentsDg.IsReadOnly = true;
-        //StudentsDg.IsReadOnly = true;
-        #endregion
         }
 
         private void RefreshGrid()
@@ -102,6 +53,7 @@ namespace Lab_10.App
             }
             SetGrid(studentList);
             ApplyDateOfBirthFilter();
+            _collectionView = CollectionViewSource.GetDefaultView(StudentsDg.ItemsSource);
         }
         private void SetGrid<T>(List<T> list) where T : new()
         {
@@ -205,6 +157,7 @@ namespace Lab_10.App
                 }
                 RefreshGrid();
                 ApplyDateOfBirthFilter();
+                _collectionView.Refresh();
             }
         }
 
@@ -220,7 +173,6 @@ namespace Lab_10.App
                 {
                     if (studentToRemove.HasGrades())
                     {
-                        // Usuń oceny studenta
                         foreach (var grade in studentToRemove.Grades.ToList())
                         {
                             _gradeRepository.Delete(grade);
@@ -230,6 +182,7 @@ namespace Lab_10.App
                     _studentRepository.Delete(studentToRemove);
                     RefreshGrid();
                     ApplyDateOfBirthFilter();
+                    _collectionView.Refresh();
                 }
             }
         }
