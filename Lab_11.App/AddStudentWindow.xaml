@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab_11.App"
         mc:Ignorable="d"
-        Title="Dodaj/Edytuj studenta" Height="450" Width="330" ResizeMode="NoResize">
+        Title="Dodaj studenta" Height="450" Width="330" ResizeMode="NoResize">
     <DockPanel Background="LightGray">
         <DockPanel DockPanel.Dock="Top" Background="DarkBlue">
             <Label Margin="20 0 0 0" FontSize="20" Foreground="White" BorderBrush="Transparent">USOSWeb</Label>
