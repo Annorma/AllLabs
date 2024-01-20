@@ -5,8 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Do_Kolokwium_02"
         mc:Ignorable="d"
-        Title="Dodaj film" Height="550" Width="380">
+        Title="Dodaj film" Height="650" Width="400">
     <DockPanel Background="LightGray">
+        <DockPanel DockPanel.Dock="Top" Background="#B51B1B">
+            <Label Margin="20 0 0 0" FontSize="20" Foreground="White" BorderBrush="Transparent">Biblioteka filmów</Label>
+        </DockPanel>
+        <DockPanel DockPanel.Dock="Top" Background="#E35E19">
+            <Label Margin="20 0 0 0" FontSize="12" Foreground="White" BorderBrush="Transparent">Dodawanie filmów</Label>
+        </DockPanel>
         <Grid VerticalAlignment="Center" DockPanel.Dock="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
@@ -23,7 +29,7 @@
             <Label Target="{Binding ElementName=NameTb}">_Nazwa filmu:</Label>
             <TextBox x:Name="NameTb" Margin="0 1 1 0" Grid.Column="1"/>
 
-            <Label Grid.Row="1" Target="{Binding ElementName=GenreTb}">_Gatunek filmowy</Label>
+            <Label Grid.Row="1" Target="{Binding ElementName=GenreTb}">_Gatunek filmowy:</Label>
             <TextBox x:Name="GenreTb" Margin="0 1 1 0" Grid.Row="1" Grid.Column="1"/>
 
             <Label Grid.Row="2" Target="{Binding ElementName=BudgetTb}">_Budżet:</Label>

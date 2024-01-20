@@ -5,8 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Do_Kolokwium_02"
         mc:Ignorable="d"
-        Title="Dodaj recenzje" Height="350" Width="300">
+        Title="Dodaj recenzje" Height="450" Width="450">
     <DockPanel Background="LightGray">
+        <DockPanel DockPanel.Dock="Top" Background="#B51B1B">
+            <Label Margin="20 0 0 0" FontSize="20" Foreground="White" BorderBrush="Transparent">Biblioteka filmów</Label>
+        </DockPanel>
+        <DockPanel DockPanel.Dock="Top" Background="#E35E19">
+            <Label Margin="20 0 0 0" FontSize="12" Foreground="White" BorderBrush="Transparent">Dodawanie recenzji</Label>
+        </DockPanel>
         <Grid VerticalAlignment="Center" DockPanel.Dock="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
@@ -15,12 +21,13 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
+                <RowDefinition Height="200px"/>
             </Grid.RowDefinitions>
             <Label Target="{Binding ElementName=RatingTb}">_Ocena:</Label>
             <TextBox x:Name="RatingTb" Margin="0 1 1 0" Grid.Column="1"/>
 
             <Label Grid.Row="1" Target="{Binding ElementName=ValueTb}">_Opis:</Label>
-            <TextBox x:Name="DescriptionTb" Margin="0 1 1 0" Grid.Row="1" Grid.Column="1"/>
+            <TextBox x:Name="DescriptionTb" Margin="0 1 1 0" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"/>
         </Grid>
         <DockPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
             <Button x:Name="AddBtn" Background="White" FontSize="15" Margin="10" Height="45" Click="AddBtn_Click">Dodaj</Button>

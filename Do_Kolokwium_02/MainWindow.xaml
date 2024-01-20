@@ -6,12 +6,31 @@
         xmlns:local="clr-namespace:Do_Kolokwium_02"
         mc:Ignorable="d"
         Title="Biblioteka filmów" Height="450" Width="800">
-    <DockPanel>
+    <Window.Resources>
+
+        <Style TargetType="Menu">
+            <Setter Property="Background" Value="#323232"/>
+        </Style>
+
+        <Style TargetType="MenuItem">
+            <Setter Property="Background" Value="#323232"/>
+            <Setter Property="BorderBrush" Value="#323232"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+    </Window.Resources>
+    <DockPanel Background="LightGray">
         <DockPanel DockPanel.Dock="Top">
+            <DockPanel DockPanel.Dock="Top" Background="#B51B1B">
+                <Label Margin="20 0 0 0" FontSize="20" Foreground="White" BorderBrush="Transparent">Biblioteka filmów</Label>
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Top" Background="#E35E19">
+                <Label Margin="20 0 0 0" FontSize="12" Foreground="White" BorderBrush="Transparent">Lista filmów</Label>
+            </DockPanel>
             <Menu>
                 <MenuItem Header="_Filmy">
                     <MenuItem x:Name="addFilmMi" Header="Dodaj" Click="addFilmMi_Click"/>
-                    <MenuItem x:Name="removeFilmMi" Header="Usuń"/>
+                    <MenuItem x:Name="removeFilmMi" Header="Usuń" Click="removeFilmMi_Click"/>
                 </MenuItem>
                 <MenuItem Header="Recenzje">
                     <MenuItem x:Name="addReviewMi" Header="Dodaj" Click="addReviewMi_Click"/>

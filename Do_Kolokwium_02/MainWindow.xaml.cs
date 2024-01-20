@@ -38,17 +38,17 @@ namespace Do_Kolokwium_02
                 var films = dbContext.Films.Include("Reviews").ToList();
                 FilmsDg.ItemsSource = films;
             }
-            Debug.WriteLine(Test());
+            //Debug.WriteLine(Test());
         }
 
 
-        private string Test()
-        {
-            string appDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            string relativePath = System.IO.Path.Combine("Database", "Films.mdf");
-            string absolutePath = System.IO.Path.Combine(appDirectory, relativePath);
-            return $"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"{absolutePath}\";Integrated Security=True";
-        }
+        //private string Test()
+        //{
+        //    string appDirectory = AppDomain.CurrentDomain.BaseDirectory;
+        //    string relativePath = System.IO.Path.Combine("Database", "Films.mdf");
+        //    string absolutePath = System.IO.Path.Combine(appDirectory, relativePath);
+        //    return $"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"{absolutePath}\";Integrated Security=True";
+        //}
 
         private void addFilmMi_Click(object sender, RoutedEventArgs e)
         {
@@ -67,6 +67,44 @@ namespace Do_Kolokwium_02
                 if (addGradeWindow.ShowDialog() == true)
                 {
                     LoadFilms();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Film nie został wybrany!");
+                return;
+            }
+        }
+
+        private void removeFilmMi_Click(object sender, RoutedEventArgs e)
+        {
+            if (FilmsDg.SelectedItem is Film selectedFilm)
+            {
+                string confirmationMessage = selectedFilm.HasReviews() ? "Ten film ma recenzje. Czy chcesz usunąć również ich?" : "Czy na pewno chcesz usunąć ten film?";
+
+                MessageBoxResult result = MessageBox.Show(confirmationMessage, "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    using (FilmsDbContext dbContext = new FilmsDbContext())
+                    {
+                        var filmToRemove = dbContext.Films.Include("Reviews").Single(f => f.Id == selectedFilm.Id);
+
+                        if (filmToRemove != null)
+                        {
+                            if (filmToRemove.HasReviews())
+                            {
+                                foreach (var review in filmToRemove.Reviews.ToList())
+                                {
+                                    dbContext.Reviews.Remove(review);
+                                }
+                            }
+
+                            dbContext.Films.Remove(filmToRemove);
+                            dbContext.SaveChanges();
+                            LoadFilms();
+                        }
+                    }
                 }
             }
             else
