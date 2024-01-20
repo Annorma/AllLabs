@@ -1,19 +1,21 @@
-﻿using System;
+﻿using Do_Kolokwium_02.Classes;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Markup;
 
-namespace Lab_11.App
+namespace Do_Kolokwium_02
 {
-    internal class StudentsDbContext : DbContext
+    internal class FilmsDbContext : DbContext
     {
-        public DbSet<Student> Students { get; set; }
-        public DbSet<Grade> Grades { get; set; }
+        public DbSet<Film> Films { get; set; }
+        public DbSet<Review> Reviews { get; set; }
 
-        public StudentsDbContext() : base()
+        public FilmsDbContext() : base()
         {
             Database.Connection.ConnectionString = GetConnectionString();
         }
@@ -22,17 +24,11 @@ namespace Lab_11.App
         {
             string appDirectory = AppDomain.CurrentDomain.BaseDirectory;
             string projectDirectory = Directory.GetParent(appDirectory).Parent.Parent.FullName;
-            string relativePath = Path.Combine("Database", "Database1.mdf");
+            string relativePath = Path.Combine("Database", "Films.mdf");
             string absolutePath = Path.Combine(projectDirectory, relativePath);
-
-            // Zwróć pełną ścieżkę połączenia
             return $"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"{absolutePath}\";Integrated Security=True";
+            //return "Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = "C:\Users\delid\source\repos\AllLabs\Do_Kolokwium_02\bin\Debug\Database\Films.mdf"; Integrated Security = True";
         }
 
-        //public StudentsDbContext() : base()
-        //{
-        //    string parametryPołączenia = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"..\\..\\Database\\Database1.mdf\";Integrated Security=True";
-        //    Database.Connection.ConnectionString = parametryPołączenia;
-        //}
     }
 }

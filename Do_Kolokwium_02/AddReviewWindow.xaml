@@ -1,0 +1,29 @@
+﻿<Window x:Class="Do_Kolokwium_02.AddReviewWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Do_Kolokwium_02"
+        mc:Ignorable="d"
+        Title="Dodaj recenzje" Height="350" Width="300">
+    <DockPanel Background="LightGray">
+        <Grid VerticalAlignment="Center" DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Label Target="{Binding ElementName=RatingTb}">_Ocena:</Label>
+            <TextBox x:Name="RatingTb" Margin="0 1 1 0" Grid.Column="1"/>
+
+            <Label Grid.Row="1" Target="{Binding ElementName=ValueTb}">_Opis:</Label>
+            <TextBox x:Name="DescriptionTb" Margin="0 1 1 0" Grid.Row="1" Grid.Column="1"/>
+        </Grid>
+        <DockPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
+            <Button x:Name="AddBtn" Background="White" FontSize="15" Margin="10" Height="45" Click="AddBtn_Click">Dodaj</Button>
+        </DockPanel>
+    </DockPanel>
+</Window>
